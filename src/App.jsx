@@ -1,9 +1,7 @@
+import AppLayout from "./layout/AppLayout";
+
 function App() {
-  return (
-    <>
-      <h1>React App</h1>
-    </>
-  );
+  return <AppLayout></AppLayout>;
 }
 
 export default App;
