@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
-import Homepage from "./pages/Homepage";
+import LoginPage from "./pages/LoginPage";
+
 import { Suspense } from "react";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <AppLayout>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<LoginPage />} />
           </Routes>
         </Suspense>
       </AppLayout>
