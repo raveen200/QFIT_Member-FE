@@ -5,10 +5,14 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
-    flowbite.content(),
+    flowbite.content()
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "nav-cream": "#fcfcf7"
+      }
+    }
   },
-  plugins: [flowbite.plugin()],
+  plugins: [flowbite.plugin()]
 };

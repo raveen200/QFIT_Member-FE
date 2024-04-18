@@ -9,19 +9,27 @@ import {
   NavbarCollapse,
   NavbarLink,
   NavbarToggle,
+  DarkThemeToggle,
+  Flowbite
 } from "flowbite-react";
 import NavLogo from "../assets/QfitLogo/favicon.svg";
 
 function AppHeader() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className="bg-nav-cream">
       <NavbarBrand href="">
         <img src={NavLogo} className="mr-3 h-6 sm:h-9 " alt="Qfit-Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          QFit Management Systems
+          QFit
         </span>
       </NavbarBrand>
+
       <div className="flex md:order-2">
+        <div className="mr-4">
+          <Flowbite>
+            <DarkThemeToggle />
+          </Flowbite>
+        </div>
         <Dropdown
           arrowIcon={false}
           inline
@@ -31,8 +39,7 @@ function AppHeader() {
               img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
               rounded
             />
-          }
-        >
+          }>
           <DropdownHeader>
             <span className="block text-sm">Name</span>
             <span className="block truncate text-sm font-medium">Email</span>
