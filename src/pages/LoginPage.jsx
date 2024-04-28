@@ -8,7 +8,7 @@ function LoginPage() {
         <div className="flex rounded-lg border  border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col md:max-w-xl md:flex-row w-full md:max-w-[1024px]">
           <img
             alt="LOGO"
-            className="h-96 w-96 rounded-t-lg object-cover md:h-auto  md:rounded-none md:rounded-l-lg bg-nav-cream  dark:bg-gray-800"
+            className=" lg:w-64 md:w-full sm:w-full rounded-t-lg object-cover md:h-auto  md:rounded-none md:rounded-l-lg bg-nav-cream  dark:bg-gray-800"
             src={Logo}
           />
 
