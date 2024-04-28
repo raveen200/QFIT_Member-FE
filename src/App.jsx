@@ -10,7 +10,7 @@ function App() {
       <AppLayout>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<LoginPage />} />
           </Routes>
         </Suspense>
       </AppLayout>
