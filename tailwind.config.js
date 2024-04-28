@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "nav-cream": "#fcfcf7"
+        "nav-cream": "#F9F7F3"
       }
     }
   },
