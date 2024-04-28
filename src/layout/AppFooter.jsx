@@ -19,6 +19,7 @@ function AppFooter() {
             <FooterLink href="#">Privacy Policy</FooterLink>
             <FooterLink href="#">Licensing</FooterLink>
             <FooterLink href="#">Contact</FooterLink>
+            <FooterLink href="#">Contact</FooterLink>
           </FooterLinkGroup>
         </div>
        
