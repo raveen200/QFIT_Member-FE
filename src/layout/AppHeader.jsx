@@ -13,11 +13,19 @@ import {
   Flowbite
 } from "flowbite-react";
 import NavLogo from "../assets/QfitLogo/favicon.svg";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "../redux/slices/LayoutSlice";
 
 function AppHeader() {
   const isLoginPage = location.pathname === "/login";
+  const dispatch = useDispatch();
+
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
+  };
   return (
     <Navbar fluid rounded className="bg-nav-cream">
+      <NavbarToggle onClick={handleToggleSidebar} />
       <NavbarBrand href="">
         <img src={NavLogo} className="mr-3 h-6 sm:h-9 " alt="Qfit-Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
@@ -54,7 +62,6 @@ function AppHeader() {
             <DropdownItem>Sign out</DropdownItem>
           </Dropdown>
         )}
-        <NavbarToggle />
       </div>
     </Navbar>
   );
