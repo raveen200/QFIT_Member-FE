@@ -10,7 +10,7 @@ function AppLayout(props) {
         <div className="mt-2 mb-4">
           <AppSideMenu />
         </div>
-        <div className="flex flex-row justify-center bg-slate-50">{props.children}</div>
+        <div className="flex flex-row justify-center w-full bg-slate-50">{props.children}</div>
       </div>
 
       <AppFooter />

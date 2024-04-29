@@ -4,7 +4,7 @@ import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
 
 function UserLIstPage() {
   return (
-    <div className="block  w-full justify-between border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex">
+    <div className=" w-full border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex">
       <div className="mb-1 w-full">
         <div className="mb-4">
           <nav aria-label="Breadcrumb" className="mb-4">
@@ -43,7 +43,8 @@ function UserLIstPage() {
             All Jobs
           </h1>
         </div>
-        <div className="sm:flex items-center">
+
+        <div className="sm:flex flex-row items-center justify-between w-full">
           <div className="mb-3 hidden items-center dark:divide-gray-700 sm:mb-0 sm:flex sm:divide-x sm:divide-gray-100">
             <form className="lg:pr-3">
               <label
@@ -89,9 +90,7 @@ function UserLIstPage() {
                 </svg>
               </a>
 
-              <a
-            
-                className="inline-flex  justify-center rounded p-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <a className="inline-flex  justify-center rounded p-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <span className="sr-only">Settings</span>
                 <svg
                   stroke="currentColor"
@@ -106,6 +105,12 @@ function UserLIstPage() {
                 </svg>
               </a>
             </div>
+          </div>
+
+          <div className="ml-auto mr-4 flex-col items-center space-x-2 sm:space-x-3">
+            <button className=" text-white lg:w-28 md:w-24 sm:w-20  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Add
+            </button>
           </div>
         </div>
       </div>
