@@ -438,7 +438,7 @@ function UserLIstPage() {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
                           <div class="flex items-center">
-                            <div class="mr-2 h-2.5 w-2.5 rounded-full bg-red-400"></div>
+                            <div class="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div>
                             Active
                           </div>
                         </td>
