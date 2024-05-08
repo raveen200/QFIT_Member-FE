@@ -14,7 +14,13 @@ function Profile() {
     address: null,
     phone: null,
     MembershipPlan: null,
-    DaysLeft: null
+    DaysLeft: null,
+    age: null,
+    joinDate: null,
+    NIC: null,
+    height: null,
+    weight: null,
+    Instructor: null
   };
 
   return (
@@ -214,50 +220,46 @@ function Profile() {
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Education</dt>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Age</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Thomas Jeff High School, Stanford University
+                  {myobj.age || "No Data found"}
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Work History
-                </dt>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Twitch, Google, Apple
+                  {myobj.gender || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Join Date</dt>
-                <dd className="text-sm font-semibold text-gray-900 dark:text-white">12-09-2021</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Languages</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  English, German, Italian, Spanish
+                  {myobj.joinDate || "No Data found"}
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Organization
-                </dt>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">NIC</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Themesberg LLC
+                  {myobj.NIC || "No Data found"}
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Role</dt>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Height</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Graphic Designer
+                  {myobj.height || "No Data found"}
                 </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Department</dt>
-                <dd className="text-sm font-semibold text-gray-900 dark:text-white">Marketing</dd>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Weight</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {myobj.weight || "No Data found"}
+                </dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Birthday</dt>
-                <dd className="text-sm font-semibold text-gray-900 dark:text-white">15-08-1990</dd>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Instructor</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {myobj.Instructor || "No Data found"}
+                </dd>
               </div>
             </dl>
           </div>
