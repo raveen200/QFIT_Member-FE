@@ -11,9 +11,9 @@ function UserLIstPage() {
   };
 
   return (
-    <div className=" w-full border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
+    <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
       <div className="mb-1 w-full">
-        <div className="mb-4">
+        <div className="col-span-full mb-4 xl:mb-2">
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex items-center">
               <li className="group flex items-center">
@@ -37,13 +37,13 @@ function UserLIstPage() {
               <li className="group flex items-center">
                 <GreaterThanIcon />
                 <span className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-                  List
+                  Member List
                 </span>
               </li>
             </ol>
           </nav>
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-            All Members
+            Member List
           </h1>
         </div>
 
