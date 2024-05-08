@@ -19,7 +19,6 @@ function UserLIstPage() {
               <li className="group flex items-center">
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  data-testid="flowbite-breadcrumb-item"
                   href="#">
                   <div className="flex items-center gap-x-3">
                     <TiHome size={24} />
@@ -31,16 +30,13 @@ function UserLIstPage() {
                 <GreaterThanIcon />
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  data-testid="flowbite-breadcrumb-item"
                   href="/users/list">
                   Users
                 </a>
               </li>
               <li className="group flex items-center">
                 <GreaterThanIcon />
-                <span
-                  className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400"
-                  data-testid="flowbite-breadcrumb-item">
+                <span className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
                   List
                 </span>
               </li>

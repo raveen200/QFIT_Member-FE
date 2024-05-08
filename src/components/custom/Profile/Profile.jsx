@@ -12,7 +12,9 @@ function Profile() {
     town: null,
     Email: null,
     address: null,
-    phone: null
+    phone: null,
+    MembershipPlan: null,
+    DaysLeft: null
   };
 
   return (
@@ -159,6 +161,105 @@ function Profile() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mb-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
+            <div className="flow-root">
+              <h2 className="text-xl font-bold dark:text-white">Membership</h2>
+              <div className="sm:flex xl:block xl:space-y-4">
+                <div className="sm:flex-1">
+                  <address className="text-sm font-normal not-italic text-gray-500 dark:text-gray-400">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <div className="mt-4">Membership Plan</div>
+                        <a
+                          className="text-sm font-medium text-gray-900 dark:text-white"
+                          href="mailto:webmaster@flowbite.com">
+                          {myobj.MembershipPlan || "No Data found"}
+                        </a>
+                      </div>
+
+                      <div>
+                        <div className="mt-4">Days left</div>
+                        <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                          {myobj.DaysLeft || "No Data found"}
+                        </div>
+                      </div>
+                    </div>
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-span-2">
+          <div className="mb-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
+            <h3 className="mb-4 text-xl font-bold dark:text-white">General information</h3>
+            <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <dt className="text-lg font-medium text-gray-900 dark:text-white">About me</dt>
+                <dd className="mt-1 max-w-prose space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                  <p>
+                    Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut
+                    sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean
+                    posuere aliquam.
+                  </p>
+                  <p>
+                    Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris
+                    amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum,
+                    cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget
+                    quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus
+                    suspendisse.
+                  </p>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Education</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  Thomas Jeff High School, Stanford University
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Work History
+                </dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  Twitch, Google, Apple
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Join Date</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">12-09-2021</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Languages</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  English, German, Italian, Spanish
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Organization
+                </dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  Themesberg LLC
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Role</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">
+                  Graphic Designer
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Department</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">Marketing</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Birthday</dt>
+                <dd className="text-sm font-semibold text-gray-900 dark:text-white">15-08-1990</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>
