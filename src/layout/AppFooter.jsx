@@ -11,7 +11,7 @@ import NavLogo from "../assets/QfitLogo/favicon.svg";
 function AppFooter() {
   const isLoginPage = location.pathname === "/login";
   return (
-    <Footer container className="bg-nav-cream fixed bottom-0 ">
+    <Footer container className="bg-nav-cream h-full">
       <div className="w-full text-center">
         {!isLoginPage && (
           <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">

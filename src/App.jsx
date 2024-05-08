@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import UserListPage from "./pages/UserListPage";
 
 import { Suspense } from "react";
+import Profile from "./components/custom/Profile/Profile";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <AppLayout>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            <Route path="/" element={<Profile />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<UserListPage />} />
+            <Route path="/admin/userList" element={<UserListPage />} />
           </Routes>
         </Suspense>
       </AppLayout>
