@@ -2,9 +2,11 @@ import { Sidebar } from "flowbite-react";
 import { BiBuoy } from "react-icons/bi";
 import { HiChartPie, HiInbox, HiUser, HiUserGroup, HiViewBoards } from "react-icons/hi";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function AppSideMenu() {
+  const navigate = useNavigate();
   const [mobileView, setMobileView] = useState("");
   const { isOpen } = useSelector((state) => state.layout.sidebar);
 
@@ -49,8 +51,18 @@ function AppSideMenu() {
             </Sidebar.Item>
 
             <Sidebar.Collapse icon={HiUser} label="Members">
-              <Sidebar.Item href="#">Member List</Sidebar.Item>
-              <Sidebar.Item href="#">Profile</Sidebar.Item>
+              <Sidebar.Item
+                onClick={() => {
+                  navigate("/admin/userList");
+                }}>
+                Member List
+              </Sidebar.Item>
+              <Sidebar.Item
+                onClick={() => {
+                  navigate("/admin/profile");
+                }}>
+                Profile
+              </Sidebar.Item>
             </Sidebar.Collapse>
             <Sidebar.Collapse icon={HiUserGroup} label="Instructors">
               <Sidebar.Item href="#">Instructors List</Sidebar.Item>

@@ -30,7 +30,7 @@ function UserLIstPage() {
                 <GreaterThanIcon />
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="/users/list">
+                  href="#">
                   Users
                 </a>
               </li>
@@ -43,7 +43,7 @@ function UserLIstPage() {
             </ol>
           </nav>
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-            All Jobs
+            All Members
           </h1>
         </div>
 

@@ -2,6 +2,8 @@ import React from "react";
 import { HiMiniIdentification } from "react-icons/hi2";
 import { FaSuitcase } from "react-icons/fa";
 import { RiMapPin2Fill } from "react-icons/ri";
+import { TiHome } from "react-icons/ti";
+import GreaterThanIcon from "../Icon/GreaterThanIcon";
 
 function Profile() {
   const myobj = {
@@ -30,81 +32,25 @@ function Profile() {
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex items-center">
               <li className="group flex items-center">
-                <svg
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth="0"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"></path>
-                </svg>
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                   href="#">
                   <div className="flex items-center gap-x-3">
-                    <svg
-                      stroke="currentColor"
-                      fill="currentColor"
-                      strokeWidth="0"
-                      viewBox="0 0 20 20"
-                      className="text-xl"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                    </svg>
+                    <TiHome size={24} />
                     <span className="dark:text-white">Home</span>
                   </div>
                 </a>
               </li>
               <li className="group flex items-center">
-                <svg
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth="0"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"></path>
-                </svg>
+                <GreaterThanIcon />
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="/users/list">
+                  href="#">
                   Users
                 </a>
               </li>
               <li className="group flex items-center">
-                <svg
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth="0"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  className="mx-1 h-6 w-6 text-gray-400 group-first:hidden md:mx-2"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"></path>
-                </svg>
+                <GreaterThanIcon />
                 <span className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
                   Profile
                 </span>
