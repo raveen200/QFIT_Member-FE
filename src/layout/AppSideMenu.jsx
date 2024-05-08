@@ -52,12 +52,14 @@ function AppSideMenu() {
 
             <Sidebar.Collapse icon={HiUser} label="Members">
               <Sidebar.Item
+                className="cursor-pointer"
                 onClick={() => {
                   navigate("/admin/userList");
                 }}>
                 Member List
               </Sidebar.Item>
               <Sidebar.Item
+                className="cursor-pointer"
                 onClick={() => {
                   navigate("/admin/profile");
                 }}>
