@@ -2,15 +2,29 @@ import { useForm } from "react-hook-form";
 import { Button, Modal } from "flowbite-react";
 import propTypes from "prop-types";
 import CustomInput from "../components/custom/CustomInput";
-import CustomSelect from "../components/custom/CustomSelect";
+import { useDispatch } from "react-redux";
+import { addMemberAction } from "../redux/actions/MemberActions";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
+  const dispatch = useDispatch();
+
   const { handleSubmit, control, trigger, reset } = useForm({
     mode: "onChange"
   });
 
-  const onSubmitUser = (data) => {
-    console.log(data);
+  const onSubmitUser = async (data) => {
+    try {
+      const response = await dispatch(addMemberAction(data)).unwrap();
+
+      if (response.isSuccess) {
+        setOpenUseraddModal(false);
+        reset();
+      } else {
+        console.log("Error");
+      }
+    } catch {
+      console.error("Error");
+    }
   };
 
   return (
@@ -22,7 +36,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
             <div className="grid grid-cols-2 gap-4">
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="First Name*"
                 name="firstName"
                 placeholder="First Name"
@@ -30,7 +44,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="Last Name*"
                 name="lastName"
                 placeholder="Last Name"
@@ -40,7 +54,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
             <div className="grid grid-cols-2 gap-4">
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="Email*"
                 name="email"
                 placeholder="Email"
@@ -48,7 +62,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="Mobile Number*"
                 name="mobileNumber"
                 placeholder="eg. +94777808008"
@@ -57,7 +71,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
             <div className="grid grid-cols-2 gap-4">
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="NIC Number*"
                 name="nic"
                 placeholder="NIC Number"
@@ -65,7 +79,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
               <CustomInput
                 control={control}
-                defaultValue=""
+                defaultValue={null}
                 label="Address*"
                 name="address"
                 placeholder="Address"
