@@ -9,14 +9,14 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
     mode: "onChange"
   });
 
-  const onSubmitUSer = (data) => {
+  const onSubmitUser = (data) => {
     console.log(data);
   };
 
   return (
     <Modal show={openUseraddModal} onClose={() => setOpenUseraddModal(false)}>
-      <form onSubmit={handleSubmit(onSubmitUSer)}>
-        <Modal.Header>Add New Location</Modal.Header>
+      <form onSubmit={handleSubmit(onSubmitUser)}>
+        <Modal.Header>Add New Member</Modal.Header>
         <Modal.Body>
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
