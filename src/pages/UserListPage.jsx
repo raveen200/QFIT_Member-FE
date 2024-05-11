@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { TiHome } from "react-icons/ti";
 import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
 import AddMemberModal from "./AddMemberModal";
-import { getAllMembersAction } from "../redux/actions/MemberActions";
+import { deleteMemberAction, getAllMembersAction } from "../redux/actions/MemberActions";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function UserLIstPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
 
@@ -20,6 +23,22 @@ function UserLIstPage() {
     };
     fetchMembers();
   }, [dispatch]);
+
+  const HandleEdit = (id) => {
+    navigate(`/admin/profile/${id}`);
+  };
+
+  const HandleDelete = async (id) => {
+    try {
+      const response = await dispatch(deleteMemberAction(id)).unwrap();
+      if (response === 200) {
+        toast.success("Member Deleted successfully");
+        dispatch(getAllMembersAction());
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
@@ -42,7 +61,7 @@ function UserLIstPage() {
                 <a
                   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                   href="#">
-                  Users
+                  Member
                 </a>
               </li>
               <li className="group flex items-center">
@@ -84,9 +103,7 @@ function UserLIstPage() {
                 Search
               </button>
 
-              <a
-                href="#"
-                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <a className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <span className="sr-only">Delete</span>
                 <svg
                   stroke="currentColor"
@@ -200,6 +217,7 @@ function UserLIstPage() {
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-x-3 whitespace-nowrap">
                               <button
+                                onClick={() => HandleEdit(member.id)}
                                 className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 focus:!ring-2 p-0 font-medium rounded-lg"
                                 type="button">
                                 <span className="flex items-center rounded-md text-sm px-3 py-2">
@@ -224,6 +242,7 @@ function UserLIstPage() {
                                 </span>
                               </button>
                               <button
+                                onClick={() => HandleDelete(member.id)}
                                 className="text-white bg-red-700 border border-transparent hover:bg-red-800 focus:ring-4 focus:ring-red-300 disabled:hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 dark:disabled:hover:bg-red-600 focus:!ring-2 p-0 font-medium rounded-lg"
                                 type="button">
                                 <span className="flex items-center rounded-md text-sm px-3 py-2">

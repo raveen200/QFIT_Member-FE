@@ -3,9 +3,9 @@ import { Button, Modal } from "flowbite-react";
 import propTypes from "prop-types";
 import CustomInput from "../components/custom/CustomInput";
 import { useDispatch } from "react-redux";
-import { addMemberAction } from "../redux/actions/MemberActions";
+import { addMemberAction, getAllMembersAction } from "../redux/actions/MemberActions";
 import { toast } from "react-toastify";
-import {MemberSchema} from "../schema/MemberSchema";
+import { MemberSchema } from "../schema/MemberSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
@@ -22,16 +22,14 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
       if (response.isSuccess) {
         toast.success("Member added successfully");
-
         setOpenUseraddModal(false);
         reset();
+        dispatch(getAllMembersAction());
       } else {
         toast.error("Error adding member");
-        console.log("Error");
       }
     } catch {
       toast.error("Error adding member");
-      console.error("Error");
     }
   };
 

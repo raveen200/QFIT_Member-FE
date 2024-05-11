@@ -21,8 +21,8 @@ export const addMember = async (member) => {
 
 export const deleteMember = async (id) => {
   try {
-    const response = await api.delete(`${API_CONSTANTS.DELETE_MEMBER}/${id}`);
-    return response;
+    const response = await api.delete(`${API_CONSTANTS.DELETE_MEMBER}?id=${id}`);
+    return response.status;
   } catch (error) {
     return error;
   }
