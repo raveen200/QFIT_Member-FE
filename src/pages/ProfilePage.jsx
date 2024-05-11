@@ -28,37 +28,37 @@ function ProfilePage() {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 w-full bg-white  dark:bg-gray-800">
-        <div className="col-span-full mb-4 xl:mb-2">
-          <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex items-center">
-              <li className="group flex items-center">
-                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                  <div className="flex items-center gap-x-3">
-                    <TiHome size={24} />
-                    <span className="dark:text-white">Home</span>
-                  </div>
-                </a>
-              </li>
-              <li className="group flex items-center">
-                <GreaterThanIcon />
-                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                  Users
-                </a>
-              </li>
-              <li className="group flex items-center">
-                <GreaterThanIcon />
-                <span className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Profile
-                </span>
-              </li>
-            </ol>
-          </nav>
-          <h1 className="text-xl font-semibold text-gray-900  dark:text-white sm:text-2xl">
-            Profile
-          </h1>
-        </div>
+    <div className="w-full bg-white  dark:bg-gray-800">
+      <div className="col-span-full px-4 pt-6">
+        <nav aria-label="Breadcrumb" className="mb-4">
+          <ol className="flex items-center">
+            <li className="group flex items-center">
+              <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                <div className="flex items-center gap-x-3">
+                  <TiHome size={24} />
+                  <span className="dark:text-white">Home</span>
+                </div>
+              </a>
+            </li>
+            <li className="group flex items-center">
+              <GreaterThanIcon />
+              <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                Member
+              </a>
+            </li>
+            <li className="group flex items-center">
+              <GreaterThanIcon />
+              <span className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
+                Profile
+              </span>
+            </li>
+          </ol>
+        </nav>
+        <h1 className="text-xl font-semibold text-gray-900  dark:text-white sm:text-2xl">
+          Profile
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 w-full ">
         <div className="col-span-full xl:col-auto">
           <div className="mb-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 dark:border-2 dark:border-cyan-200 sm:p-6 xl:p-8">
             <div className="flex justify-between">
@@ -234,7 +234,7 @@ function ProfilePage() {
           detailedMember={detailedMember}
         />
       )}
-    </>
+    </div>
   );
 }
 
