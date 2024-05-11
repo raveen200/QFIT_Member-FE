@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { HiMiniIdentification } from "react-icons/hi2";
 import { FaSuitcase } from "react-icons/fa";
 import { RiMapPin2Fill } from "react-icons/ri";
@@ -8,12 +8,13 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMemberByIdAction } from "../redux/actions/MemberActions";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
+import EditPersonalModal from "./EditPersonalModal.jsx";
 
 function ProfilePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
+  const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -21,6 +22,10 @@ function ProfilePage() {
     };
     fetchMembers();
   }, [dispatch, id]);
+
+  const handleEditPersonalModal = () => {
+    setOpenEditPersonalModal(true);
+  };
 
   return (
     <>
@@ -112,6 +117,7 @@ function ProfilePage() {
               <div>
                 <BiSolidMessageSquareEdit
                   size={35}
+                  onClick={handleEditPersonalModal}
                   className=" hover:bg-gray-100 hover:text-cyan-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 />
               </div>
@@ -221,6 +227,13 @@ function ProfilePage() {
           </div>
         </div>
       </div>
+      {openEditPersonalModal && (
+        <EditPersonalModal
+          openEditPersonalModal={openEditPersonalModal}
+          setOpenEditPersonalModal={setOpenEditPersonalModal}
+          detailedMember={detailedMember}
+        />
+      )}
     </>
   );
 }

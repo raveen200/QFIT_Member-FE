@@ -31,7 +31,7 @@ export const deleteMember = async (id) => {
 export const updateMember = async (member) => {
   try {
     const response = await api.put(API_CONSTANTS.UPDATE_MEMBER, member);
-    return response;
+    return response.status;
   } catch (error) {
     return error;
   }
