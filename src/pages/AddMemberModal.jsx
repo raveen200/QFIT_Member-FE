@@ -4,11 +4,15 @@ import propTypes from "prop-types";
 import CustomInput from "../components/custom/CustomInput";
 import { useDispatch } from "react-redux";
 import { addMemberAction } from "../redux/actions/MemberActions";
+import { toast } from "react-toastify";
+import {MemberSchema} from "../schema/MemberSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
   const dispatch = useDispatch();
 
   const { handleSubmit, control, trigger, reset } = useForm({
+    resolver: yupResolver(MemberSchema),
     mode: "onChange"
   });
 
@@ -17,12 +21,16 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
       const response = await dispatch(addMemberAction(data)).unwrap();
 
       if (response.isSuccess) {
+        toast.success("Member added successfully");
+
         setOpenUseraddModal(false);
         reset();
       } else {
+        toast.error("Error adding member");
         console.log("Error");
       }
     } catch {
+      toast.error("Error adding member");
       console.error("Error");
     }
   };
