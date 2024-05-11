@@ -24,7 +24,7 @@ function AppHeader() {
     dispatch(toggleSidebar());
   };
   return (
-    <Navbar fluid rounded className="bg-nav-cream">
+    <Navbar fluid rounded className="bg-nav-cream dark:border-b-2 dark:border-cyan-200" >
       <NavbarToggle onClick={handleToggleSidebar} />
       <NavbarBrand href="">
         <img src={NavLogo} className="mr-3 h-6 sm:h-9 " alt="Qfit-Logo" />

@@ -9,9 +9,9 @@ function AppLayout(props) {
     <>
       <CustomToastContainer />
       <AppHeader />
-      <div className="flex flex-row  ">
-        <div className="mt-2 mb-4">{!isLoginPage && <AppSideMenu />}</div>
-        <div className="flex flex-row justify-center w-full  bg-slate-50">{props.children}</div>
+      <div className="flex flex-row  dark:bg-gray-800">
+        <div className="mb-4 h-full">{!isLoginPage && <AppSideMenu />}</div>
+        <div className="flex flex-row justify-center w-full  bg-slate-50 ">{props.children}</div>
       </div>
 
       <AppFooter />
