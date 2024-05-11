@@ -28,7 +28,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white  dark:bg-gray-800">
       <div className="col-span-full px-4 pt-6">
         <nav aria-label="Breadcrumb" className="mb-4">
           <ol className="flex items-center">
@@ -58,7 +58,7 @@ function ProfilePage() {
           Profile
         </h1>
       </div>
-      <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 w-full bg-white  dark:bg-gray-800">
+      <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 w-full ">
         <div className="col-span-full xl:col-auto">
           <div className="mb-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 dark:border-2 dark:border-cyan-200 sm:p-6 xl:p-8">
             <div className="flex justify-between">
