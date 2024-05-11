@@ -39,7 +39,7 @@ function AppSideMenu() {
 
   return (
     <div
-      className={`transition ease-in-out duration-700 h-full  ${isOpen ? `${mobileView}` : "hidden "}`}>
+      className={`transition ease-in-out duration-700 h-screen    ${isOpen ? `${mobileView}` : "hidden "}`}>
       <Sidebar aria-label="Sidebar with content separator example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
