@@ -133,11 +133,9 @@ function UserLIstPage() {
           <div className="overflow-x-auto">
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden shadow">
-                <div
-                  data-testid="table-element"
-                  className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                   <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                    <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400 bg-gray-100 dark:bg-gray-700">
+                    <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:text-gray-400 dark:bg-gray-700">
                       <tr>
                         <th className="px-6 py-3">
                           <label
@@ -154,10 +152,8 @@ function UserLIstPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {members.map((member) => (
-                        <tr
-                          data-testid="table-row-element"
-                          className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                      {members?.map((member) => (
+                        <tr key={member.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                           <td className="px-6 py-4 w-4 p-4">
                             <div className="flex items-center">
                               <label htmlFor="checkbox-2" className="sr-only">
@@ -177,26 +173,27 @@ function UserLIstPage() {
                             />
                             <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
                               <div className="text-base font-semibold text-gray-900 dark:text-white">
-                                {member.firstName} {member.lastName}
+                                {member?.firstName} {member?.lastName}
                               </div>
                               <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                {member.email}
+                                {member?.email}
                               </div>
                             </div>
                           </td>
 
                           <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
-                            G- {member.id}
+                            G- {member?.id}
                           </td>
 
                           <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
-                            {member.mobileNumber}
+                            {member?.mobileNumber}
                           </td>
 
                           <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
                             <div className="flex items-center">
-                              <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div>
-                              Active
+                              <div
+                                className={`mr-2 h-2.5 w-2.5 rounded-full ${member?.status === 0 ? "bg-green-400" : "bg-red-400"}`}></div>
+                              {member?.status === 0 ? "Active" : "Inactive"}
                             </div>
                           </td>
 
@@ -253,7 +250,6 @@ function UserLIstPage() {
                           </td>
                         </tr>
                       ))}
-                      ;
                     </tbody>
                   </table>
                 </div>
