@@ -9,14 +9,14 @@ const MemberSlice = createSlice({
     isLoading: false,
     error: null
   },
-  reducers: {
-    getAllMembers: MemberReducer.getAllMembers,
-    addMember: MemberReducer.addMember,
-    deleteMember: MemberReducer.deleteMember,
-    updateMember: MemberReducer.updateMember,
-    getMemberById: MemberReducer.getMemberById,
-    getMemberByFirstName: MemberReducer.getMemberByFirstName,
-    getMemberByNIC: MemberReducer.getMemberByNIC
+  extraReducers: (builder) => {
+    MemberReducer.addMember(builder);
+    MemberReducer.deleteMember(builder);
+    MemberReducer.updateMember(builder);
+    MemberReducer.getMemberById(builder);
+    MemberReducer.getAllMembers(builder);
+    MemberReducer.getMemberByFirstName(builder);
+    MemberReducer.getMemberByNIC(builder);
   }
 });
 
