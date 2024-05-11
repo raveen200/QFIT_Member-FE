@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiMiniIdentification } from "react-icons/hi2";
 import { FaSuitcase } from "react-icons/fa";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
-import GreaterThanIcon from "../Icon/GreaterThanIcon";
+import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon.jsx";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMemberByIdAction } from "../redux/actions/MemberActions";
 
-function Profile() {
+function ProfilePage() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const detailedMember = useSelector((state) => state.memberInfo.member.result);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      dispatch(getMemberByIdAction(id));
+    };
+    fetchMembers();
+  }, [dispatch, id]);
   const myobj = {
     fullName: null,
     gId: null,
@@ -43,9 +57,7 @@ function Profile() {
               </li>
               <li className="group flex items-center">
                 <GreaterThanIcon />
-                <a
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="#">
+                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Users
                 </a>
               </li>
@@ -67,27 +79,27 @@ function Profile() {
               <img
                 alt=""
                 src={
-                  myobj.img ||
+                  detailedMember?.dp ||
                   "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg"
                 }
                 className="mb-2 h-20 w-20 rounded-lg"
               />
               <div>
                 <h2 className="text-xl font-bold dark:text-white">
-                  {myobj.fullName || "No User Name Found"}
+                  {detailedMember?.firstName} {detailedMember?.lastName}
                 </h2>
                 <ul className="mt-2 space-y-1">
                   <li className="flex items-center text-gray-600 dark:text-gray-400">
                     <HiMiniIdentification className="mr-2" />
-                    <span>{myobj.gId || "No Gym Id found"}</span>
+                    <span> G-{detailedMember?.id || "No Gym Id found"}</span>
                   </li>
                   <li className="flex items-center text-gray-600 dark:text-gray-400">
                     <FaSuitcase className="mr-2" />
-                    <span>{myobj.job || "No Job Position found"}</span>
+                    <span>{detailedMember?.job || "No Job Position found"}</span>
                   </li>
                   <li className="flex items-center text-gray-600 dark:text-gray-400">
                     <RiMapPin2Fill className="mr-2" />
-                    <span>{myobj.town || "No Address Found"}</span>
+                    <span>{detailedMember?.city || "No City Found"}</span>
                   </li>
                 </ul>
               </div>
@@ -99,15 +111,15 @@ function Profile() {
                     <a
                       className="text-sm font-medium text-gray-900 dark:text-white"
                       href="mailto:webmaster@flowbite.com">
-                      {myobj.Email || "No email found"}
+                      {detailedMember?.email || "No email found"}
                     </a>
                     <div className="mt-4">Home address</div>
                     <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                      {myobj.address || "No address found"}
+                      {detailedMember?.address || "No address found"}
                     </div>
                     <div className="mt-4">Phone number</div>
                     <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                      {myobj.phone || "No phone number found"}
+                      {detailedMember?.mobileNumber || "No phone number found"}
                     </div>
                   </address>
                 </div>
@@ -151,60 +163,49 @@ function Profile() {
               <div className="sm:col-span-2">
                 <dt className="text-lg font-medium text-gray-900 dark:text-white">About me</dt>
                 <dd className="mt-1 max-w-prose space-y-3 text-sm text-gray-500 dark:text-gray-400">
-                  <p>
-                    Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut
-                    sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean
-                    posuere aliquam.
-                  </p>
-                  <p>
-                    Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris
-                    amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum,
-                    cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget
-                    quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus
-                    suspendisse.
-                  </p>
+                  <p>{detailedMember?.aboutMe || "No Data found"}</p>
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Age</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.age || "No Data found"}
+                  {detailedMember?.age || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.gender || "No Data found"}
+                  {detailedMember?.gender || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Join Date</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.joinDate || "No Data found"}
+                  {detailedMember?.joinDate || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">NIC</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.NIC || "No Data found"}
+                  {detailedMember?.nic || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Height</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.height || "No Data found"}
+                  {detailedMember?.height || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Weight</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.weight || "No Data found"}
+                  {detailedMember?.weight || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Instructor</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {myobj.Instructor || "No Data found"}
+                  {detailedMember?.insName || "No Data found"}
                 </dd>
               </div>
             </dl>
@@ -215,4 +216,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfilePage;
