@@ -6,6 +6,7 @@ import { deleteMemberAction, getAllMembersAction } from "../redux/actions/Member
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CustomDeleteModal from "../components/custom/CustomDeleteModal";
 
 function UserLIstPage() {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ function UserLIstPage() {
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
   const [findMember, setFindMember] = useState(members);
-
+  const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
+  const [DeleteMemberId, setDeleteMemberId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleOpenUseraddModal = () => {
@@ -31,16 +33,21 @@ function UserLIstPage() {
     navigate(`/admin/profile/${id}`);
   };
 
-  const HandleDelete = async (id) => {
-    try {
-      const response = await dispatch(deleteMemberAction(id)).unwrap();
-      if (response === 200) {
-        toast.success("Member Deleted successfully");
-        dispatch(getAllMembersAction());
-      }
-    } catch (e) {
-      console.log(e);
-    }
+  // const HandleDelete = async (id) => {
+  //   try {
+  //     const response = await dispatch(deleteMemberAction(id)).unwrap();
+  //     if (response === 200) {
+  //       toast.success("Member Deleted successfully");
+  //       dispatch(getAllMembersAction());
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  const HandleDelete = (id) => {
+    setIsConfirmationDeleteOpen(true);
+    setDeleteMemberId(id);
   };
 
   const handleSearchChange = (event) => {
@@ -296,6 +303,13 @@ function UserLIstPage() {
         <AddMemberModal
           openUseraddModal={openUseraddModal}
           setOpenUseraddModal={setOpenUseraddModal}
+        />
+      )}
+      {isConfirmationDeleteOpen && (
+        <CustomDeleteModal
+          isConfirmationDeleteOpen={isConfirmationDeleteOpen}
+          setIsConfirmationDeleteOpen={setIsConfirmationDeleteOpen}
+          DeleteMemberId={DeleteMemberId}
         />
       )}
     </div>
