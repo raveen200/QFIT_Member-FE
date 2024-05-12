@@ -12,6 +12,9 @@ function UserLIstPage() {
   const navigate = useNavigate();
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
+  const [findMember, setFindMember] = useState(members);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleOpenUseraddModal = () => {
     setOpenUseraddModal(true);
@@ -39,6 +42,21 @@ function UserLIstPage() {
       console.log(e);
     }
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setFindMember(members);
+    } else {
+      const results = members.filter((member) =>
+        member.nic.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFindMember(results);
+    }
+  }, [searchTerm, members]);
 
   return (
     <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
@@ -87,7 +105,9 @@ function UserLIstPage() {
                       className="block  w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                       id="users-search"
                       name="users-search"
-                      placeholder="Search Jobs"
+                      placeholder="Search Member"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
                     />
                   </div>
                 </div>
@@ -164,7 +184,7 @@ function UserLIstPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {members?.map((member) => (
+                      {findMember?.map((member) => (
                         <tr key={member.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                           <td className="px-6 py-4 w-4 p-4">
                             <div className="flex items-center">

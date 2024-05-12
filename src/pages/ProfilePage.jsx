@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { HiMiniIdentification } from "react-icons/hi2";
 import { FaSuitcase } from "react-icons/fa";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMemberByIdAction } from "../redux/actions/MemberActions";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import EditPersonalModal from "./EditPersonalModal.jsx";
+import { PiIdentificationCardBold } from "react-icons/pi";
 
 function ProfilePage() {
   const { id } = useParams();
@@ -78,7 +78,7 @@ function ProfilePage() {
                     </h2>
                     <ul className="mt-2 space-y-1">
                       <li className="flex items-center text-gray-600 dark:text-gray-400">
-                        <HiMiniIdentification className="mr-2" />
+                        <PiIdentificationCardBold className="mr-2" />
                         <span> G-{detailedMember?.id || "No Gym Id found"}</span>
                       </li>
                       <li className="flex items-center text-gray-600 dark:text-gray-400">
