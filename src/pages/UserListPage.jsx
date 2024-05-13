@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TiHome } from "react-icons/ti";
 import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
 import AddMemberModal from "./AddMemberModal";
-import { deleteMemberAction, getAllMembersAction } from "../redux/actions/MemberActions";
+import { getAllMembersAction } from "../redux/actions/MemberActions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -33,18 +33,6 @@ function UserLIstPage() {
     navigate(`/admin/profile/${id}`);
   };
 
-  // const HandleDelete = async (id) => {
-  //   try {
-  //     const response = await dispatch(deleteMemberAction(id)).unwrap();
-  //     if (response === 200) {
-  //       toast.success("Member Deleted successfully");
-  //       dispatch(getAllMembersAction());
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const HandleDelete = (id) => {
     setIsConfirmationDeleteOpen(true);
     setDeleteMemberId(id);
@@ -52,6 +40,10 @@ function UserLIstPage() {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const HandleSearchDelete = () => {
+    setSearchTerm("");
   };
 
   useEffect(() => {
@@ -72,9 +64,7 @@ function UserLIstPage() {
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex items-center">
               <li className="group flex items-center">
-                <a
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="#">
+                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   <div className="flex items-center gap-x-3">
                     <TiHome size={24} />
                     <span className="dark:text-white">Home</span>
@@ -83,9 +73,7 @@ function UserLIstPage() {
               </li>
               <li className="group flex items-center">
                 <GreaterThanIcon />
-                <a
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="#">
+                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Member
                 </a>
               </li>
@@ -125,7 +113,9 @@ function UserLIstPage() {
                 Search
               </button>
 
-              <a className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <a
+                onClick={HandleSearchDelete}
+                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <span className="sr-only">Delete</span>
                 <svg
                   stroke="currentColor"
