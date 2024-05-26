@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMemberByIdAction } from "../redux/actions/MemberActions";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import EditPersonalModal from "./EditPersonalModal.jsx";
-import EditGeneralModal from "./EditGenaralModal.jsx";
+import EditGeneralModal from "./EditGeneralModal.jsx";
 import { PiIdentificationCardBold } from "react-icons/pi";
 
 function ProfilePage() {
