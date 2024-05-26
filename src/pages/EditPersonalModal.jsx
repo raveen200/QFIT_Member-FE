@@ -19,8 +19,6 @@ function EditPersonalModal({ setOpenEditPersonalModal, openEditPersonalModal, de
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(updateMemberAction({ ...detailedMember, ...data })).unwrap();
-      console.log(response);
-
       if (response === 200) {
         toast.success("Member updated successfully");
         dispatch(getMemberByIdAction(detailedMember.id));

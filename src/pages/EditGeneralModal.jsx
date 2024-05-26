@@ -6,16 +6,32 @@ import { useDispatch } from "react-redux";
 import { Label, Modal, Textarea } from "flowbite-react";
 import CustomInput from "../components/custom/CustomInput";
 import CustomSelect from "../components/custom/CustomSelect";
+import { getMemberByIdAction, updateMemberAction } from "../redux/actions/MemberActions";
 
 function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detailedMember }) {
+  const dispatch = useDispatch();
   const { handleSubmit, control } = useForm({
     mode: "onChange"
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   console.log(detailedMember);
+
+  const onSubmit = async (data) => {
+    delete data.instructor;
+    data.gender = Number(data.gender);
+    try {
+      const response = await dispatch(updateMemberAction({ ...detailedMember, ...data })).unwrap();
+      if (response === 200) {
+        toast.success("Member updated successfully");
+        dispatch(getMemberByIdAction(detailedMember.id));
+        setOpenEditGeneralModal(false);
+      } else {
+        toast.error("Error updating member");
+      }
+    } catch {
+      toast.error("Error updating member");
+    }
+  };
 
   return (
     <Modal show={openEditGeneralModal} onClose={() => setOpenEditGeneralModal(false)}>
@@ -27,7 +43,7 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.nic}
-                disabled
+                deActive={true}
                 label="NIC "
                 name="nic"
                 placeholder="NIC"
@@ -54,7 +70,7 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
                 defaultValue={detailedMember?.height}
                 label="Height *"
                 name="height"
-                placeholder="Height"
+                placeholder="Height "
               />
 
               <CustomInput
@@ -80,7 +96,7 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
               <div className="mb-2 block">
                 <Label htmlFor="comment" value="About Me" />
               </div>
-              <Textarea name="aboutMe" placeholder="Describe your self..." required rows={4} />
+              <Textarea name="aboutMe" placeholder="Describe your self..." />
             </div>
           </div>
         </Modal.Body>

@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 import { useController } from "react-hook-form";
 
 function CustomInput(props) {
-  const { label, name, placeholder } = props;
+  const { label, name, placeholder} = props;
   const { field, fieldState } = useController(props);
   return (
     <div>

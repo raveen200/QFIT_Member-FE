@@ -32,6 +32,7 @@ function ProfilePage() {
     setOpenEditGeneralModal(true);
   };
 
+
   return (
     <div className="w-full bg-white  dark:bg-gray-800">
       <div className="col-span-full px-4 pt-6">
@@ -196,7 +197,11 @@ function ProfilePage() {
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.gender || "No Data found"}
+                  {detailedMember?.gender === 0
+                    ? "Male"
+                    : detailedMember?.gender === 1
+                      ? "Female"
+                      : "No Data found"}
                 </dd>
               </div>
               <div>
