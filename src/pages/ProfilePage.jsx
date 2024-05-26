@@ -32,7 +32,6 @@ function ProfilePage() {
     setOpenEditGeneralModal(true);
   };
 
-
   return (
     <div className="w-full bg-white  dark:bg-gray-800">
       <div className="col-span-full px-4 pt-6">
@@ -197,9 +196,9 @@ function ProfilePage() {
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.gender === 0
+                  {detailedMember?.gender === 1
                     ? "Male"
-                    : detailedMember?.gender === 1
+                    : detailedMember?.gender === 2
                       ? "Female"
                       : "No Data found"}
                 </dd>
@@ -219,13 +218,13 @@ function ProfilePage() {
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Height</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.height || "No Data found"}
+                  {detailedMember?.height + " cm" || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Weight</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.weight || "No Data found"}
+                  {detailedMember?.weight + " kg" || "No Data found"}
                 </dd>
               </div>
               <div>

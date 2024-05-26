@@ -7,10 +7,14 @@ import { Label, Modal, Textarea } from "flowbite-react";
 import CustomInput from "../components/custom/CustomInput";
 import CustomSelect from "../components/custom/CustomSelect";
 import { getMemberByIdAction, updateMemberAction } from "../redux/actions/MemberActions";
+import CustomInputTextArea from "../components/custom/CustomInputTextArea";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { MemberGeneralInfoEdit } from "../schema/MemberSchema";
 
 function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detailedMember }) {
   const dispatch = useDispatch();
   const { handleSubmit, control } = useForm({
+    resolver: yupResolver(MemberGeneralInfoEdit),
     mode: "onChange"
   });
 
@@ -19,6 +23,8 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
   const onSubmit = async (data) => {
     delete data.instructor;
     data.gender = Number(data.gender);
+    data.nic = detailedMember.nic;
+    console.log(data);
     try {
       const response = await dispatch(updateMemberAction({ ...detailedMember, ...data })).unwrap();
       if (response === 200) {
@@ -43,7 +49,7 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.nic}
-                deActive={true}
+                disabled
                 label="NIC "
                 name="nic"
                 placeholder="NIC"
@@ -61,22 +67,21 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
                 label="Gender"
                 name="gender"
                 options={[
-                  { id: 0, text: "Male" },
-                  { id: 1, text: "Female" }
+                  { id: 1, text: "Male" },
+                  { id: 2, text: "Female" }
                 ]}
               />
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.height}
-                label="Height *"
+                label="Height"
                 name="height"
-                placeholder="Height "
+                placeholder="Height"
               />
-
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.weight}
-                label="Weight *"
+                label="Weight"
                 name="weight"
                 placeholder="Weight"
               />
@@ -91,13 +96,13 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
                 ]}
               />
             </div>
-
-            <div className="">
-              <div className="mb-2 block">
-                <Label htmlFor="comment" value="About Me" />
-              </div>
-              <Textarea name="aboutMe" placeholder="Describe your self..." />
-            </div>
+            <CustomInputTextArea
+              control={control}
+              defaultValue={detailedMember?.aboutMe}
+              label="About Me"
+              name="aboutMe"
+              placeholder="Describe your self..."
+            />
           </div>
         </Modal.Body>
         <Modal.Footer className="pb-4">
