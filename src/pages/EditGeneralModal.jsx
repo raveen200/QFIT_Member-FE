@@ -15,8 +15,7 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
   const onSubmit = (data) => {
     console.log(data);
   };
-
-  console.log(openEditGeneralModal);
+  console.log(detailedMember);
 
   return (
     <Modal show={openEditGeneralModal} onClose={() => setOpenEditGeneralModal(false)}>
@@ -25,12 +24,14 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
         <Modal.Body>
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <div className="max-w-md">
-                <div className="mb-2 block">
-                  <Label htmlFor="comment" value="Your message" />
-                </div>
-                <Textarea id="comment" placeholder="Leave a comment..." required rows={4} />
-              </div>
+              <CustomInput
+                control={control}
+                defaultValue={detailedMember?.nic}
+                disabled
+                label="NIC "
+                name="nic"
+                placeholder="NIC"
+              />
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.age}
@@ -38,7 +39,6 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
                 name="age"
                 placeholder="Age"
               />
-
               <CustomSelect
                 control={control}
                 defaultValue={detailedMember?.gender}
@@ -49,45 +49,38 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
                   { id: 1, text: "Female" }
                 ]}
               />
+              <CustomInput
+                control={control}
+                defaultValue={detailedMember?.height}
+                label="Height *"
+                name="height"
+                placeholder="Height"
+              />
+
+              <CustomInput
+                control={control}
+                defaultValue={detailedMember?.weight}
+                label="Weight *"
+                name="weight"
+                placeholder="Weight"
+              />
+              <CustomSelect
+                control={control}
+                defaultValue={detailedMember?.gender}
+                label="Instructor"
+                name="instructor"
+                options={[
+                  { id: 0, text: "Supun" },
+                  { id: 1, text: "Chamal" }
+                ]}
+              />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <CustomInput
-                control={control}
-                defaultValue={detailedMember?.email}
-                label="Email*"
-                name="email"
-                placeholder="Email"
-              />
-
-              <CustomInput
-                control={control}
-                defaultValue={detailedMember?.mobileNumber}
-                label="Phone Number*"
-                name="mobileNumber"
-                placeholder="Phone Number"
-              />
-              <CustomInput
-                control={control}
-                defaultValue={detailedMember?.address}
-                label="Address*"
-                name="address"
-                placeholder="Address"
-              />
-              <CustomInput
-                control={control}
-                defaultValue={detailedMember?.job}
-                label="Job"
-                name="job"
-                placeholder="No Data"
-              />
-              <CustomInput
-                control={control}
-                defaultValue={detailedMember?.city}
-                label="City"
-                name="city"
-                placeholder="No Data"
-              />
+            <div className="">
+              <div className="mb-2 block">
+                <Label htmlFor="comment" value="About Me" />
+              </div>
+              <Textarea name="aboutMe" placeholder="Describe your self..." required rows={4} />
             </div>
           </div>
         </Modal.Body>
