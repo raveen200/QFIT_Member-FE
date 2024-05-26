@@ -3,8 +3,8 @@ import Logo from "../assets/QfitLogo/logo-with-non-bg.png";
 
 function LoginPage() {
   return (
-    <Card className=" w-full min-h-screen ">
-      <div className="flex flex-col items-center   px-6 justify-center  lg:gap-y-12 ">
+    <Card className=" w-full min-h-80vh">
+      <div className="flex flex-col items-center px-6 justify-center  lg:gap-y-12 ">
         <div className="flex rounded-lg border  border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col md:max-w-xl md:flex-row w-full md:max-w-[1024px]">
           <img
             alt="LOGO"
@@ -13,15 +13,13 @@ function LoginPage() {
           />
 
           <div className="flex h-full flex-col justify-center gap-4 p-6">
-            <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl">
-              Sign in to platform
-            </h1>
+            <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl">Sign in to QFit</h1>
             <form>
               <div className="mb-4 flex flex-col gap-y-3">
                 <label
                   className="text-sm font-medium text-gray-900 dark:text-gray-300"
                   htmlFor="email">
-                  Your email
+                  User Email
                 </label>
                 <div className="flex">
                   <div className="relative w-full">
@@ -39,7 +37,7 @@ function LoginPage() {
                 <label
                   className="text-sm font-medium text-gray-900 dark:text-gray-300"
                   htmlFor="password">
-                  Your password
+                  Password
                 </label>
                 <div className="flex">
                   <div className="relative w-full">

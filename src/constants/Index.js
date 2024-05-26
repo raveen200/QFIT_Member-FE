@@ -17,3 +17,9 @@ export const REDUX_ACTIONS = {
   GET_MEMBER_BY_FIRST_NAME: "member/getMemberByFirstName",
   GET_MEMBER_BY_NIC: "member/getMemberByNIC"
 };
+
+export const AUTH_CONSTANTS = {
+  LOGIN: "/api/auth/login",
+  REGISTER: "/api/auth/register",
+  LOGOUT: "/api/auth/logout"
+};
