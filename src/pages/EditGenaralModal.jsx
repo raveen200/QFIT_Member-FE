@@ -1,12 +1,25 @@
+import propTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { Label, Textarea } from "flowbite-react";
+import { Button } from "flowbite-react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { Label, Modal, Textarea } from "flowbite-react";
+import CustomInput from "../components/custom/CustomInput";
+import CustomSelect from "../components/custom/CustomSelect";
 
-function EditGeneralModal({ setOpenEditGeneralModal, openEdiGeneralModal, detailedMember }) {
+function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detailedMember }) {
   const { handleSubmit, control } = useForm({
     mode: "onChange"
   });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  console.log(openEditGeneralModal);
+
   return (
-    <Modal show={openEdiGeneralModal} onClose={() => setOpenEditGeneralModal(false)}>
+    <Modal show={openEditGeneralModal} onClose={() => setOpenEditGeneralModal(false)}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Modal.Header>Edit General Information</Modal.Header>
         <Modal.Body>
@@ -88,5 +101,11 @@ function EditGeneralModal({ setOpenEditGeneralModal, openEdiGeneralModal, detail
     </Modal>
   );
 }
+
+EditGeneralModal.propTypes = {
+  openEditGeneralModal: propTypes.bool.isRequired,
+  setOpenEditGeneralModal: propTypes.func.isRequired,
+  detailedMember: propTypes.object.isRequired
+};
 
 export default EditGeneralModal;
