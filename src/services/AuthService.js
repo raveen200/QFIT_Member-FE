@@ -5,7 +5,7 @@ export const login = async (data) => {
   try {
     const response = await authApi.post(AUTH_CONSTANTS.LOGIN, data);
     console.log(response);
-    return response;
+    return response.data;
   } catch (error) {
     throw error;
   }

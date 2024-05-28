@@ -1,7 +1,33 @@
 import { Card } from "flowbite-react";
 import Logo from "../assets/QfitLogo/logo-with-non-bg.png";
+import { login } from "../services/AuthService";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AuthSchema } from "../schema/AuthSchema";
+import { toast } from "react-toastify";
 
 function LoginPage() {
+  const { handleSubmit, control, register } = useForm({
+    resolver: yupResolver(AuthSchema),
+    mode: "onChange"
+  });
+
+  const onSubmit = async (data) => {
+    const userName = data.email;
+    data.username = userName;
+    delete data.email;
+    try {
+      const response = await login(data);
+      if (response.isSuccess) {
+        toast.success("Login Success");
+      } else {
+        toast.error("Login Failed");
+      }
+    } catch (error) {
+      toast.error("User Email or password is incorrect");
+    }
+  };
+
   return (
     <Card className=" w-full min-h-80vh">
       <div className="flex flex-col items-center px-6 justify-center  lg:gap-y-12 ">
@@ -14,11 +40,11 @@ function LoginPage() {
 
           <div className="flex h-full flex-col justify-center gap-4 p-6">
             <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl">Sign in to QFit</h1>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4 flex flex-col gap-y-3">
                 <label
                   className="text-sm font-medium text-gray-900 dark:text-gray-300"
-                  htmlFor="email">
+                  htmlFor="text">
                   User Email
                 </label>
                 <div className="flex">
@@ -26,8 +52,9 @@ function LoginPage() {
                     <input
                       className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                       id="email"
-                      name="email"
-                      placeholder="name@company.com"
+                      {...register("email")}
+                      control={control}
+                      placeholder=""
                       type="email"
                     />
                   </div>
@@ -44,8 +71,9 @@ function LoginPage() {
                     <input
                       className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                       id="password"
-                      name="password"
-                      placeholder="••••••••"
+                      {...register("password")}
+                      control={control}
+                      placeholder=""
                       type="password"
                     />
                   </div>
@@ -67,7 +95,7 @@ function LoginPage() {
                 </div>
                 <a
                   href="#"
-                  className="w-1/2 text-right text-sm text-primary-600 dark:text-primary-300">
+                  className="w-1/2 text-right text-sm text-primary-600 dark:text-primary-300 ">
                   Lost Password?
                 </a>
               </div>

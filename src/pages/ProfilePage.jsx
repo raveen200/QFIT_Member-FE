@@ -218,13 +218,13 @@ function ProfilePage() {
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Height</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.height + " cm" || "No Data found"}
+                  {detailedMember?.height || "No Data found"}
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Weight</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.weight + " kg" || "No Data found"}
+                  {detailedMember?.weight || "No Data found"}
                 </dd>
               </div>
               <div>
