@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import { TiHome } from "react-icons/ti";
 import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
 import AddMemberModal from "./AddMemberModal";
-import { deleteMemberAction, getAllMembersAction } from "../redux/actions/MemberActions";
+import { getAllMembersAction } from "../redux/actions/MemberActions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CustomDeleteModal from "../components/custom/CustomDeleteModal";
 
 function UserLIstPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
+  const [findMember, setFindMember] = useState(members);
+  const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
+  const [DeleteMemberId, setDeleteMemberId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleOpenUseraddModal = () => {
     setOpenUseraddModal(true);
@@ -28,17 +33,29 @@ function UserLIstPage() {
     navigate(`/admin/profile/${id}`);
   };
 
-  const HandleDelete = async (id) => {
-    try {
-      const response = await dispatch(deleteMemberAction(id)).unwrap();
-      if (response === 200) {
-        toast.success("Member Deleted successfully");
-        dispatch(getAllMembersAction());
-      }
-    } catch (e) {
-      console.log(e);
-    }
+  const HandleDelete = (id) => {
+    setIsConfirmationDeleteOpen(true);
+    setDeleteMemberId(id);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const HandleSearchDelete = () => {
+    setSearchTerm("");
+  };
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setFindMember(members);
+    } else {
+      const results = members.filter((member) =>
+        member.nic.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFindMember(results);
+    }
+  }, [searchTerm, members]);
 
   return (
     <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
@@ -47,9 +64,7 @@ function UserLIstPage() {
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex items-center">
               <li className="group flex items-center">
-                <a
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="#">
+                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   <div className="flex items-center gap-x-3">
                     <TiHome size={24} />
                     <span className="dark:text-white">Home</span>
@@ -58,9 +73,7 @@ function UserLIstPage() {
               </li>
               <li className="group flex items-center">
                 <GreaterThanIcon />
-                <a
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                  href="#">
+                <a className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Member
                 </a>
               </li>
@@ -87,7 +100,9 @@ function UserLIstPage() {
                       className="block  w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                       id="users-search"
                       name="users-search"
-                      placeholder="Search Jobs"
+                      placeholder="Search Member"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
                     />
                   </div>
                 </div>
@@ -98,7 +113,9 @@ function UserLIstPage() {
                 Search
               </button>
 
-              <a className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <a
+                onClick={HandleSearchDelete}
+                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 <span className="sr-only">Delete</span>
                 <svg
                   stroke="currentColor"
@@ -164,7 +181,7 @@ function UserLIstPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {members?.map((member) => (
+                      {findMember?.map((member) => (
                         <tr key={member.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                           <td className="px-6 py-4 w-4 p-4">
                             <div className="flex items-center">
@@ -276,6 +293,13 @@ function UserLIstPage() {
         <AddMemberModal
           openUseraddModal={openUseraddModal}
           setOpenUseraddModal={setOpenUseraddModal}
+        />
+      )}
+      {isConfirmationDeleteOpen && (
+        <CustomDeleteModal
+          isConfirmationDeleteOpen={isConfirmationDeleteOpen}
+          setIsConfirmationDeleteOpen={setIsConfirmationDeleteOpen}
+          DeleteMemberId={DeleteMemberId}
         />
       )}
     </div>

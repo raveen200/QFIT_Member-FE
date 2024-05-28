@@ -1,20 +1,21 @@
 import React from "react";
 import propTypes from "prop-types";
 import { useController } from "react-hook-form";
+import { Textarea } from "flowbite-react";
 
-function CustomInput(props) {
+function CustomInputTextArea(props) {
   const { label, name, placeholder} = props;
   const { field, fieldState } = useController(props);
   return (
     <div>
       <div className="mb-2 block">
         <span
-          htmlFor="base-input"
+          htmlFor="comment"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           {label}
         </span>
       </div>
-      <input
+      <Textarea
         {...field}
         value={field?.value || ""}
         placeholder={placeholder || name}
@@ -27,10 +28,10 @@ function CustomInput(props) {
   );
 }
 
-CustomInput.propTypes = {
+CustomInputTextArea.propTypes = {
   label: propTypes.string.isRequired,
   name: propTypes.string,
   placeholder: propTypes.string
 };
 
-export default CustomInput;
+export default CustomInputTextArea;

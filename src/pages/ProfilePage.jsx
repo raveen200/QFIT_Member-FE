@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { HiMiniIdentification } from "react-icons/hi2";
 import { FaSuitcase } from "react-icons/fa";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
@@ -9,12 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMemberByIdAction } from "../redux/actions/MemberActions";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import EditPersonalModal from "./EditPersonalModal.jsx";
+import EditGeneralModal from "./EditGeneralModal.jsx";
+import { PiIdentificationCardBold } from "react-icons/pi";
 
 function ProfilePage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
+  const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -25,6 +27,9 @@ function ProfilePage() {
 
   const handleEditPersonalModal = () => {
     setOpenEditPersonalModal(true);
+  };
+  const handleEditGeneralModal = () => {
+    setOpenEditGeneralModal(true);
   };
 
   return (
@@ -78,7 +83,7 @@ function ProfilePage() {
                     </h2>
                     <ul className="mt-2 space-y-1">
                       <li className="flex items-center text-gray-600 dark:text-gray-400">
-                        <HiMiniIdentification className="mr-2" />
+                        <PiIdentificationCardBold className="mr-2" />
                         <span> G-{detailedMember?.id || "No Gym Id found"}</span>
                       </li>
                       <li className="flex items-center text-gray-600 dark:text-gray-400">
@@ -169,6 +174,7 @@ function ProfilePage() {
               <h3 className="mb-4 text-xl font-bold dark:text-white">General information</h3>
               <div>
                 <BiSolidMessageSquareEdit
+                  onClick={handleEditGeneralModal}
                   size={35}
                   className=" hover:bg-gray-100 hover:text-cyan-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 />
@@ -190,7 +196,11 @@ function ProfilePage() {
               <div>
                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</dt>
                 <dd className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {detailedMember?.gender || "No Data found"}
+                  {detailedMember?.gender === 1
+                    ? "Male"
+                    : detailedMember?.gender === 2
+                      ? "Female"
+                      : "No Data found"}
                 </dd>
               </div>
               <div>
@@ -227,13 +237,24 @@ function ProfilePage() {
           </div>
         </div>
       </div>
-      {openEditPersonalModal && (
-        <EditPersonalModal
-          openEditPersonalModal={openEditPersonalModal}
-          setOpenEditPersonalModal={setOpenEditPersonalModal}
-          detailedMember={detailedMember}
-        />
-      )}
+      <div>
+        {openEditPersonalModal && (
+          <EditPersonalModal
+            openEditPersonalModal={openEditPersonalModal}
+            setOpenEditPersonalModal={setOpenEditPersonalModal}
+            detailedMember={detailedMember}
+          />
+        )}
+      </div>
+      <div>
+        {openEditGeneralModal && (
+          <EditGeneralModal
+            openEditGeneralModal={openEditGeneralModal}
+            setOpenEditGeneralModal={setOpenEditGeneralModal}
+            detailedMember={detailedMember}
+          />
+        )}
+      </div>
     </div>
   );
 }

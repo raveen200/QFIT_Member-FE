@@ -11,6 +11,9 @@ export default {
     extend: {
       colors: {
         "nav-cream": "#F9F7F3"
+      },
+      minHeight: {
+        "80vh": "80vh"
       }
     }
   },
