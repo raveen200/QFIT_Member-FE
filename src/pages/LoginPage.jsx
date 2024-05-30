@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthSchema } from "../schema/AuthSchema";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const { handleSubmit, control, register } = useForm({
     resolver: yupResolver(AuthSchema),
     mode: "onChange"
@@ -20,6 +24,7 @@ function LoginPage() {
       const response = await login(data);
       if (response.isSuccess) {
         toast.success("Login Success");
+        navigate("/admin/userList");
       } else {
         toast.error("Login Failed");
       }
@@ -27,6 +32,13 @@ function LoginPage() {
       toast.error("User Email or password is incorrect");
     }
   };
+
+
+
+
+
+
+
 
   return (
     <Card className=" w-full min-h-80vh">

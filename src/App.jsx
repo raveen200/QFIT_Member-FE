@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import UserListPage from "./pages/UserListPage";
-
 import { Suspense } from "react";
 import ProfilePage from "./pages/ProfilePage.jsx";
 

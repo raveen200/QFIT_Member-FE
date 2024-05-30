@@ -18,8 +18,6 @@ function EditGeneralModal({ openEditGeneralModal, setOpenEditGeneralModal, detai
     mode: "onChange"
   });
 
-  console.log(detailedMember);
-
   const onSubmit = async (data) => {
     delete data.instructor;
     data.gender = Number(data.gender);
