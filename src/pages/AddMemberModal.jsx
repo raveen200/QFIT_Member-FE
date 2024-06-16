@@ -7,9 +7,12 @@ import { addMemberAction, getAllMembersAction } from "../redux/actions/MemberAct
 import { toast } from "react-toastify";
 import { MemberSchema } from "../schema/MemberSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import QRCode from "qrcode";
+import { useState } from "react";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
   const dispatch = useDispatch();
+  const [QrFile, setQrFile] = useState(null);
 
   const { handleSubmit, control, trigger, reset } = useForm({
     resolver: yupResolver(MemberSchema),
@@ -18,10 +21,26 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
   const onSubmitUser = async (data) => {
     try {
+      const QRData = {
+        nic: data.nic,
+        name: data.firstName,
+        mobileNumber: data.mobileNumber,
+        email: data.email
+      };
+      console.log(JSON.stringify(QRData));
+
       const response = await dispatch(addMemberAction(data)).unwrap();
 
       if (response.isSuccess) {
         toast.success("Member added successfully");
+        const qrCode = await QRCode.toDataURL(JSON.stringify(QRData));
+        let link = document.createElement("a");
+        link.href = qrCode;
+
+        link.download = `${data.firstName}_${data.nic}_QRCode.png`;
+
+        link.click();
+
         setOpenUseraddModal(false);
         reset();
         dispatch(getAllMembersAction());

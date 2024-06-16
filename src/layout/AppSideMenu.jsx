@@ -72,7 +72,12 @@ function AppSideMenu() {
             </Sidebar.Collapse>
           </Sidebar.ItemGroup>
           <Sidebar.ItemGroup>
-            <Sidebar.Item href="#" icon={HiChartPie}>
+            <Sidebar.Item
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/admin/finance");
+              }}
+              icon={HiChartPie}>
               Finance
             </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiViewBoards}>
