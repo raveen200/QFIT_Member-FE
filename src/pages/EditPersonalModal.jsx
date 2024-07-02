@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
-import { useForm } from "react-hook-form";
-import { Button, Modal } from "flowbite-react";
+import { Controller, useForm } from "react-hook-form";
+import { Button, FileInput, Label, Modal } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import CustomInput from "../components/custom/CustomInput";
 import { updateMemberAction, getMemberByIdAction } from "../redux/actions/MemberActions";
@@ -86,6 +86,20 @@ function EditPersonalModal({ setOpenEditPersonalModal, openEditPersonalModal, de
                 name="job"
                 placeholder="No Data"
               />
+              <div>
+                <Label htmlFor="base-input" value="Profile Picture" />
+                <Controller
+                  control={control}
+                  name="displayPicture"
+                  render={({ field }) => (
+                    <FileInput
+                      id="displayPicture"
+                      onChange={(e) => field.onChange(e.target.files[0])}
+                      onBlur={field.onBlur}
+                    />
+                  )}
+                />
+              </div>
               <CustomInput
                 control={control}
                 defaultValue={detailedMember?.city}
