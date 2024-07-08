@@ -4,66 +4,65 @@ import ApexCharts from "apexcharts";
 const CustomLineChart = ({ categories, series }) => {
   useEffect(() => {
     const options = {
-        chart: {
-          height: "100%",
-          maxWidth: "100%",
-          type: "line",
-          fontFamily: "Inter, sans-serif",
-          dropShadow: {
-            enabled: false,
-          },
-          toolbar: {
-            show: false,
-          },
+      chart: {
+        height: "100%",
+        maxWidth: "100%",
+        type: "line",
+        fontFamily: "Inter, sans-serif",
+        dropShadow: {
+          enabled: false
         },
-        tooltip: {
-          enabled: true,
-          x: {
-            show: false,
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          width: 6,
-        },
-        grid: {
+        toolbar: {
+          show: false
+        }
+      },
+      tooltip: {
+        enabled: true,
+        x: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "smooth",
+        width: 6
+      },
+      grid: {
+        show: true,
+        strokeDashArray: 4,
+        padding: {
+          left: 2,
+          right: 2,
+          top: -26
+        }
+      },
+      series: series,
+      legend: {
+        show: false
+      },
+
+      xaxis: {
+        categories: categories,
+        labels: {
           show: true,
-          strokeDashArray: 4,
-          padding: {
-            left: 2,
-            right: 2,
-            top: -26
-          },
+          style: {
+            fontFamily: "Inter, sans-serif",
+            cssClass: "text-xs font-normal fill-gray-500 dark:fill-gray-400"
+          }
         },
-        series: series,
-        legend: {
+        axisBorder: {
           show: false
         },
-        stroke: {
-          curve: 'smooth'
-        },
-        xaxis: {
-          categories: categories,
-          labels: {
-            show: true,
-            style: {
-              fontFamily: "Inter, sans-serif",
-              cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-            }
-          },
-          axisBorder: {
-            show: false,
-          },
-          axisTicks: {
-            show: false,
-          },
-        },
-        yaxis: {
-          show: false,
-        },
+        axisTicks: {
+          show: false
+        }
+      },
+      yaxis: {
+        show: false
       }
+    };
 
     const chartElement = document.createElement("div");
     chartElement.id = "line-chart";
@@ -74,7 +73,10 @@ const CustomLineChart = ({ categories, series }) => {
 
     return () => {
       chart.destroy();
-      document.querySelector(".line-chart-container").removeChild(chartElement);
+      const container = document.querySelector(".line-chart-container");
+      if (container && chartElement) {
+        container.removeChild(chartElement);
+      }
     };
   }, [categories, series]);
 

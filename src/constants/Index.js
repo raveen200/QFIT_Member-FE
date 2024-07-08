@@ -23,3 +23,19 @@ export const AUTH_CONSTANTS = {
   REGISTER: "/api/auth/register",
   LOGOUT: "/api/auth/logout"
 };
+
+export const MEMBERSHIP_API_CONSTANTS = {
+  GET_MEMBERSHIP: "/api/Membership",
+  ADD_MEMBERSHIP: "/api/Membership",
+  DELETE_MEMBERSHIP: "/api/Membership",
+  UPDATE_MEMBERSHIP: "/api/Membership",
+  GET_MEMBERSHIP_BY_ID: "/api/Membership"
+};
+
+export const MEMBERSHIP_REDUX_ACTIONS = {
+  GET_MEMBERSHIP: "membership/getMembership",
+  ADD_MEMBERSHIP: "membership/addMembership",
+  DELETE_MEMBERSHIP: "membership/deleteMembership",
+  UPDATE_MEMBERSHIP: "membership/updateMembership",
+  GET_MEMBERSHIP_BY_ID: "membership/getMembershipById"
+};

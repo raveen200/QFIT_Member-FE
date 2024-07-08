@@ -13,11 +13,7 @@ const tableData = {
         { Name: "Michael Brown", Id: 3, Nic: "456123789V", MemberShipType: "SemiAnnual" },
         { Name: "Emily White", Id: 4, Nic: "321456987V", MemberShipType: "Annual" },
         { Name: "David Wilson", Id: 5, Nic: "789123456V", MemberShipType: "Monthly" },
-        { Name: "Sarah Johnson", Id: 6, Nic: "654789123V", MemberShipType: "Quarterly" },
-        { Name: "James Williams", Id: 7, Nic: "987321654V", MemberShipType: "SemiAnnual" },
-        { Name: "Linda Brown", Id: 8, Nic: "123789456V", MemberShipType: "Annual" },
-        { Name: "Robert Jones", Id: 9, Nic: "456987321V", MemberShipType: "Monthly" },
-        { Name: "Patricia Garcia", Id: 10, Nic: "789654123V", MemberShipType: "Quarterly" }
+ 
       ],
     columns : [
         { Header: "Name", accessor: "Name" },

@@ -12,8 +12,8 @@ import EditGeneralModal from "./EditGeneralModal.jsx";
 import { PiIdentificationCardBold } from "react-icons/pi";
 
 function ProfilePage() {
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
   const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
