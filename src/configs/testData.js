@@ -1,7 +1,7 @@
 
 
 const radialChartData = {
-    series: [90, 85, 70],
+    series: [10, 85, 70,],
     labels: ["Done", "In progress", "To do"],
     colors: ["#1C64F2", "#16BDCA", "#FDBA8C"]
 };
