@@ -10,17 +10,21 @@ import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import EditPersonalModal from "./EditPersonalModal.jsx";
 import EditGeneralModal from "./EditGeneralModal.jsx";
 import { PiIdentificationCardBold } from "react-icons/pi";
+import { getMembershipByIdAction } from "../redux/actions/MembershipActions";
 
 function ProfilePage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
+  const selectedMembership = useSelector((state) => state.membershipInfo.membership);
+  console.log(selectedMembership);
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
   const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
 
   useEffect(() => {
     const fetchMembers = async () => {
       dispatch(getMemberByIdAction(id));
+      dispatch(getMembershipByIdAction(id));
     };
     fetchMembers();
   }, [dispatch, id]);
@@ -148,17 +152,25 @@ function ProfilePage() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <div className="mt-4">Membership Plan</div>
-                        <a
-                          className="text-sm font-medium text-gray-900 dark:text-white"
-                          href="mailto:webmaster@flowbite.com">
-                          {"No Data found"}
+                        <a className="text-sm font-medium text-gray-900 dark:text-white">
+                          {selectedMembership?.membershipType === 1
+                            ? "Monthly"
+                            : selectedMembership?.membershipType === 2
+                              ? "Quarterly"
+                              : selectedMembership?.membershipType === 3
+                                ? "Semi_Annually"
+                                : selectedMembership?.membershipType === 4
+                                  ? "Annually"
+                                  : selectedMembership?.membershipType === 5
+                                    ? "Corporate"
+                                    : "No Data found"}
                         </a>
                       </div>
 
                       <div>
                         <div className="mt-4">Days left</div>
                         <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                          {"No Data found"}
+                          {selectedMembership?.remainingDays || "No Data found"}
                         </div>
                       </div>
                     </div>
