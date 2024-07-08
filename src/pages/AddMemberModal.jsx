@@ -2,15 +2,23 @@ import { useForm } from "react-hook-form";
 import { Button, Modal } from "flowbite-react";
 import propTypes from "prop-types";
 import CustomInput from "../components/custom/CustomInput";
+import CustomSelect from "../components/custom/CustomSelect";
 import { useDispatch } from "react-redux";
 import { addMemberAction, getAllMembersAction } from "../redux/actions/MemberActions";
+import { addMembershipAction } from "../redux/actions/MembershipActions";
 import { toast } from "react-toastify";
 import { MemberSchema } from "../schema/MemberSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import QRCode from "qrcode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
+  const [endDate, setEndDate] = useState(new Date());
+  const [remainingDays, setRemainingDays] = useState(0);
+  const [membershipData, setMembershipData] = useState({});
+
+  console.log(endDate,'endDate',remainingDays);
+
   const dispatch = useDispatch();
   const [QrFile, setQrFile] = useState(null);
 
@@ -19,7 +27,44 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
     mode: "onChange"
   });
 
+
+
+
+  
+
   const onSubmitUser = async (data) => {
+    console.log(data);
+
+    if (data.membershipType === "1") {
+      setRemainingDays(30);
+      setEndDate(new Date(new Date().setDate(new Date().getDate() + 30)));
+    } else if (data.membershipType === "2") {
+      setRemainingDays(90);
+      setEndDate(new Date(new Date().setDate(new Date().getDate() + 90)));
+    } else if (data.membershipType === "3") {
+      setRemainingDays(180);
+      setEndDate(new Date(new Date().setDate(new Date().getDate() + 180)));
+    } else if (data.membershipType === "4") {
+      setRemainingDays(365);
+      setEndDate(new Date(new Date().setDate(new Date().getDate() + 365)));
+    } else if (data.membershipType === "5") {
+      setRemainingDays(99999);
+      setEndDate(new Date(new Date().setDate(new Date().getDate() + 99999)));
+    }
+
+    useEffect(() => {
+      setMembershipData({
+        nic: data.nic,
+        membershipType: data.membershipType,
+        remainingDays,
+        endDate
+      });
+    }, [remainingDays, endDate]);
+
+    console.log(membershipData);
+
+    const setMemberShip = await dispatch(addMembershipAction(data));
+
     try {
       const QRData = {
         nic: data.nic,
@@ -27,7 +72,7 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
         mobileNumber: data.mobileNumber,
         email: data.email
       };
-      console.log(JSON.stringify(QRData));
+      // console.log(JSON.stringify(QRData));
 
       const response = await dispatch(addMemberAction(data)).unwrap();
 
@@ -108,6 +153,19 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
                 label="Address*"
                 name="address"
                 placeholder="Address"
+              />
+              <CustomSelect
+                control={control}
+                defaultValue=""
+                label="Membership Type*"
+                name="membershipType"
+                options={[
+                  { id: 1, text: "Monthly" },
+                  { id: 2, text: "Quarterly" },
+                  { id: 3, text: "Semi_Annually" },
+                  { id: 4, text: "Annually" },
+                  { id: 5, text: "Corporate" }
+                ]}
               />
             </div>
           </div>

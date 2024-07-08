@@ -24,7 +24,7 @@ function LoginPage() {
       const response = await login(data);
       if (response.isSuccess) {
         toast.success("Login Success");
-        navigate("/admin/userList");
+        navigate("/admin/dashboard");
       } else {
         toast.error("Login Failed");
       }
