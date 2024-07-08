@@ -4,7 +4,7 @@ import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
 import AddMemberModal from "./AddMemberModal";
 import { getAllMembersAction } from "../redux/actions/MemberActions";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { getAllMembershipsAction } from "../redux/actions/MembershipActions";
 import { useNavigate } from "react-router-dom";
 import CustomDeleteModal from "../components/custom/CustomDeleteModal";
 
@@ -13,6 +13,8 @@ function UserLIstPage() {
   const navigate = useNavigate();
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
+  const memberships = useSelector((state) => state.membershipInfo.memberships);
+  console.log("memberships", memberships);
   const [findMember, setFindMember] = useState(members);
   const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
   const [DeleteMemberId, setDeleteMemberId] = useState(null);
@@ -25,6 +27,7 @@ function UserLIstPage() {
   useEffect(() => {
     const fetchMembers = async () => {
       dispatch(getAllMembersAction());
+      dispatch(getAllMembershipsAction());
     };
     fetchMembers();
   }, [dispatch]);
@@ -181,106 +184,112 @@ function UserLIstPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {findMember?.map((member) => (
-                        <tr key={member.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
-                          <td className="px-6 py-4 w-4 p-4">
-                            <div className="flex items-center">
-                              <label htmlFor="checkbox-2" className="sr-only">
-                                checkbox
-                              </label>
-                            </div>
-                          </td>
+                      {findMember?.map((member) => {
+                        const membership = memberships.find(
+                          (membership) => membership.membershipId === member.id
+                        );
 
-                          <td className="px-6 py-4 mr-12 flex items-center space-x-6 whitespace-nowrap p-4 lg:mr-0">
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={
-                                member.dp ||
-                                "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg"
-                              }
-                              alt="Neil Sims avatar"
-                            />
-                            <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                              <div className="text-base font-semibold text-gray-900 dark:text-white">
-                                {member?.firstName} {member?.lastName}
+                        return (
+                          <tr key={member.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <td className="px-6 py-4 w-4 p-4">
+                              <div className="flex items-center">
+                                <label htmlFor="checkbox-2" className="sr-only">
+                                  checkbox
+                                </label>
                               </div>
+                            </td>
+
+                            <td className="px-6 py-4 mr-12 flex items-center space-x-6 whitespace-nowrap p-4 lg:mr-0">
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={
+                                  member.dp ||
+                                  "https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg"
+                                }
+                                alt="Neil Sims avatar"
+                              />
                               <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                {member?.email}
+                                <div className="text-base font-semibold text-gray-900 dark:text-white">
+                                  {member?.firstName} {member?.lastName}
+                                </div>
+                                <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                  {member?.email}
+                                </div>
                               </div>
-                            </div>
-                          </td>
+                            </td>
 
-                          <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
-                            G- {member?.id}
-                          </td>
+                            <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
+                              G- {member?.id}
+                            </td>
 
-                          <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
-                            {member?.mobileNumber}
-                          </td>
+                            <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
+                              {member?.mobileNumber}
+                            </td>
 
-                          <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
-                            <div className="flex items-center">
-                              <div
-                                className={`mr-2 h-2.5 w-2.5 rounded-full ${member?.status === 0 ? "bg-green-400" : "bg-red-400"}`}></div>
-                              {member?.status === 0 ? "Active" : "Inactive"}
-                            </div>
-                          </td>
+                            <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
+                              <div className="flex items-center">
+                                <div
+                                  className={`mr-2 h-2.5 w-2.5 rounded-full ${membership?.remainingDays === 0 ? "bg-red-400" : "bg-green-400"}`}></div>
+                                {membership?.remainingDays === 0 ? "Inactive" : "Active"}
+                              </div>
+                            </td>
 
-                          <td className="px-6 py-4">
-                            <div className="flex items-center gap-x-3 whitespace-nowrap">
-                              <button
-                                onClick={() => HandleEdit(member.id)}
-                                className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 focus:!ring-2 p-0 font-medium rounded-lg"
-                                type="button">
-                                <span className="flex items-center rounded-md text-sm px-3 py-2">
-                                  <div className="flex items-center gap-x-2  text-black dark:text-white">
-                                    <svg
-                                      stroke="currentColor"
-                                      fill="none"
-                                      strokeWidth="0"
-                                      viewBox="0 0 24 24"
-                                      className="text-lg"
-                                      height="1em"
-                                      width="1em"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                    </svg>
-                                    Edit user
-                                  </div>
-                                </span>
-                              </button>
-                              <button
-                                onClick={() => HandleDelete(member.id)}
-                                className="text-white bg-red-700 border border-transparent hover:bg-red-800 focus:ring-4 focus:ring-red-300 disabled:hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 dark:disabled:hover:bg-red-600 focus:!ring-2 p-0 font-medium rounded-lg"
-                                type="button">
-                                <span className="flex items-center rounded-md text-sm px-3 py-2">
-                                  <div className="flex items-center gap-x-2">
-                                    <svg
-                                      stroke="currentColor"
-                                      fill="currentColor"
-                                      strokeWidth="0"
-                                      viewBox="0 0 20 20"
-                                      className="text-lg"
-                                      height="1em"
-                                      width="1em"
-                                      xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                        clipRule="evenodd"></path>
-                                    </svg>
-                                    Delete user
-                                  </div>
-                                </span>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            <td className="px-6 py-4">
+                              <div className="flex items-center gap-x-3 whitespace-nowrap">
+                                <button
+                                  onClick={() => HandleEdit(member.id)}
+                                  className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 focus:!ring-2 p-0 font-medium rounded-lg"
+                                  type="button">
+                                  <span className="flex items-center rounded-md text-sm px-3 py-2">
+                                    <div className="flex items-center gap-x-2  text-black dark:text-white">
+                                      <svg
+                                        stroke="currentColor"
+                                        fill="none"
+                                        strokeWidth="0"
+                                        viewBox="0 0 24 24"
+                                        className="text-lg"
+                                        height="1em"
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                      </svg>
+                                      Edit user
+                                    </div>
+                                  </span>
+                                </button>
+                                <button
+                                  onClick={() => HandleDelete(member.id)}
+                                  className="text-white bg-red-700 border border-transparent hover:bg-red-800 focus:ring-4 focus:ring-red-300 disabled:hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 dark:disabled:hover:bg-red-600 focus:!ring-2 p-0 font-medium rounded-lg"
+                                  type="button">
+                                  <span className="flex items-center rounded-md text-sm px-3 py-2">
+                                    <div className="flex items-center gap-x-2">
+                                      <svg
+                                        stroke="currentColor"
+                                        fill="currentColor"
+                                        strokeWidth="0"
+                                        viewBox="0 0 20 20"
+                                        className="text-lg"
+                                        height="1em"
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                          clipRule="evenodd"></path>
+                                      </svg>
+                                      Delete user
+                                    </div>
+                                  </span>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
