@@ -4,10 +4,10 @@ import {
   addMembership,
   deleteMembership,
   updateMembership,
-  getMembershipById,
-  getMembershipByMemberId
+  getMembershipById
 } from "../../services/MembershipService";
 import { MEMBERSHIP_REDUX_ACTIONS } from "../../constants/Index";
+
 
 export const getAllMembershipsAction = createAsyncThunk(
   MEMBERSHIP_REDUX_ACTIONS.GET_MEMBERSHIP,
@@ -48,5 +48,3 @@ export const getMembershipByIdAction = createAsyncThunk(
     return response;
   }
 );
-
-

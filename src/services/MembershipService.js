@@ -4,11 +4,13 @@ import { MEMBERSHIP_API_CONSTANTS } from "../constants/Index";
 export const getAllMemberships = async () => {
   try {
     const response = await api.get(MEMBERSHIP_API_CONSTANTS.GET_MEMBERSHIP);
-    return response;
+    return response.data;
   } catch (error) {
     return error;
   }
 };
+
+
 
 export const addMembership = async (membership) => {
   try {
