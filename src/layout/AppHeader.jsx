@@ -6,8 +6,6 @@ import {
   DropdownItem,
   Navbar,
   NavbarBrand,
-  NavbarCollapse,
-  NavbarLink,
   NavbarToggle,
   DarkThemeToggle,
   Flowbite
@@ -15,9 +13,11 @@ import {
 import NavLogo from "../assets/QfitLogo/favicon.svg";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "../redux/slices/LayoutSlice";
+import { useNavigate } from "react-router-dom";
 
 function AppHeader() {
-  const isLoginPage = location.pathname === "/login";
+  const navigate = useNavigate();
+  const isLoginPage = location.pathname === "/";
   const dispatch = useDispatch();
 
   const handleToggleSidebar = () => {
@@ -26,7 +26,11 @@ function AppHeader() {
   return (
     <Navbar fluid rounded className="bg-nav-cream dark:border-b-2 dark:border-cyan-200">
       {!isLoginPage && <NavbarToggle onClick={handleToggleSidebar} />}
-      <NavbarBrand href="">
+      <NavbarBrand
+        className="cursor-pointer"
+        onClick={() => {
+          navigate("/admin/dashboard");
+        }}>
         <img src={NavLogo} className="mr-3 h-6 sm:h-9 " alt="Qfit-Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           QFit

@@ -1,7 +1,7 @@
 
 
 const radialChartData = {
-    series: [90, 85, 70],
+    series: [10, 85, 70,],
     labels: ["Done", "In progress", "To do"],
     colors: ["#1C64F2", "#16BDCA", "#FDBA8C"]
 };
@@ -13,6 +13,8 @@ const tableData = {
         { Name: "Michael Brown", Id: 3, Nic: "456123789V", MemberShipType: "SemiAnnual" },
         { Name: "Emily White", Id: 4, Nic: "321456987V", MemberShipType: "Annual" },
         { Name: "David Wilson", Id: 5, Nic: "789123456V", MemberShipType: "Monthly" },
+        { Name: "David Wilson", Id: 5, Nic: "789123456V", MemberShipType: "Monthly" },
+
  
       ],
     columns : [

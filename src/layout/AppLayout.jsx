@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 function AppLayout(props) {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const isLoginPage = location.pathname === "/";
   return (
     <>
       <CustomToastContainer />

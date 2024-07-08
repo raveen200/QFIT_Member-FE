@@ -43,7 +43,12 @@ function AppSideMenu() {
       <Sidebar aria-label="Sidebar with content separator example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            <Sidebar.Item href="#" icon={HiChartPie}>
+            <Sidebar.Item
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/admin/dashboard");
+              }}
+              icon={HiChartPie}>
               Dashboard
             </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiInbox}>
