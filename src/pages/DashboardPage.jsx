@@ -17,8 +17,6 @@ function DashboardPage() {
       ? [...memberships].sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
       : [];
 
-  console.log(sortedMemberships);
-
   useEffect(() => {
     const fetchMembers = async () => {
       dispatch(getAllMembersAction());
