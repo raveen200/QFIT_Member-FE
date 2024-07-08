@@ -13,12 +13,6 @@ import QRCode from "qrcode";
 import { useEffect, useState } from "react";
 
 function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
-  const [endDate, setEndDate] = useState(new Date());
-  const [remainingDays, setRemainingDays] = useState(0);
-  const [membershipData, setMembershipData] = useState({});
-
-  console.log(endDate,'endDate',remainingDays);
-
   const dispatch = useDispatch();
   const [QrFile, setQrFile] = useState(null);
 
@@ -27,43 +21,51 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
     mode: "onChange"
   });
 
-
-
-
-  
-
-  const onSubmitUser = async (data) => {
-    console.log(data);
-
-    if (data.membershipType === "1") {
-      setRemainingDays(30);
-      setEndDate(new Date(new Date().setDate(new Date().getDate() + 30)));
-    } else if (data.membershipType === "2") {
-      setRemainingDays(90);
-      setEndDate(new Date(new Date().setDate(new Date().getDate() + 90)));
-    } else if (data.membershipType === "3") {
-      setRemainingDays(180);
-      setEndDate(new Date(new Date().setDate(new Date().getDate() + 180)));
-    } else if (data.membershipType === "4") {
-      setRemainingDays(365);
-      setEndDate(new Date(new Date().setDate(new Date().getDate() + 365)));
-    } else if (data.membershipType === "5") {
-      setRemainingDays(99999);
-      setEndDate(new Date(new Date().setDate(new Date().getDate() + 99999)));
+  const getMembershipDays = (membershipType) => {
+    let remainingDays = 0;
+    let endDate = new Date();
+    if (membershipType === "1") {
+      remainingDays = 30;
+      endDate = new Date(new Date().setDate(new Date().getDate() + 30));
+    } else if (membershipType === "2") {
+      remainingDays = 90;
+      endDate = new Date(new Date().setDate(new Date().getDate() + 90));
+    } else if (membershipType === "3") {
+      remainingDays = 180;
+      endDate = new Date(new Date().setDate(new Date().getDate() + 180));
+    } else if (membershipType === "4") {
+      remainingDays = 365;
+      endDate = new Date(new Date().setDate(new Date().getDate() + 365));
+    } else if (membershipType === "5") {
+      remainingDays = 99999;
+      endDate = new Date(new Date().setDate(new Date().getDate() + 99999));
     }
 
-    useEffect(() => {
-      setMembershipData({
-        nic: data.nic,
-        membershipType: data.membershipType,
-        remainingDays,
-        endDate
-      });
-    }, [remainingDays, endDate]);
+    return { remainingDays, endDate };
+  };
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const onSubmitUser = async (data) => {
+    const { nic, firstName, lastName, email, mobileNumber, address, membershipType } = data;
+    const { remainingDays, endDate } = getMembershipDays(data.membershipType);
+    const formattedEndDate = formatDate(endDate);
+
+    const membershipData = {
+      nic: nic,
+      membershipType: Number(membershipType),
+      remainingDays,
+      endDate: formattedEndDate
+    };
 
     console.log(membershipData);
 
-    const setMemberShip = await dispatch(addMembershipAction(data));
+    const setMemberShip = await dispatch(addMembershipAction(membershipData));
 
     try {
       const QRData = {
