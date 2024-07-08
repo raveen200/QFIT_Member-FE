@@ -8,6 +8,7 @@ import { getAllMembershipsAction } from "../redux/actions/MembershipActions";
 import { useNavigate } from "react-router-dom";
 import CustomDeleteModal from "../components/custom/CustomDeleteModal";
 
+
 function UserLIstPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -58,6 +59,21 @@ function UserLIstPage() {
       setFindMember(results);
     }
   }, [searchTerm, members]);
+
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const currentItems = findMember?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(findMember?.length / itemsPerPage);
+
+  const goToNextPage = () => setCurrentPage((prevPage) => prevPage + 1);
+
+  const goToPreviousPage = () => setCurrentPage((prevPage) => prevPage - 1);
 
   return (
     <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
@@ -183,7 +199,7 @@ function UserLIstPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {findMember?.map((member) => {
+                      {currentItems?.map((member) => {
                         const membership = memberships.find(
                           (membership) => membership.membershipId === member.id
                         );
@@ -291,6 +307,25 @@ function UserLIstPage() {
                       })}
                     </tbody>
                   </table>
+                  {totalPages > 1 && (
+                    <div className="flex font-semibold items-center dark:text-white gap-4 justify-end ml-4 mr-8 mt-4">
+                      <button
+                        className="bg-blue-100 p-2 rounded-lg  dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-4 dark:focus:ring-gray-500 dark:focus:ring-opacity-50 dark:disabled:cursor-not-allowed dark:disabled:opacity-50"
+                        onClick={goToPreviousPage}
+                        disabled={currentPage === 1}>
+                        Previous
+                      </button>
+                      <span>
+                        Page {currentPage} of {totalPages}
+                      </span>
+                      <button
+                        className="bg-blue-100 p-2 rounded-lg  dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-4 dark:focus:ring-gray-500 dark:focus:ring-opacity-50 dark:disabled:cursor-not-allowed dark:disabled:opacity-50"
+                        onClick={goToNextPage}
+                        disabled={currentPage === totalPages}>
+                        Next
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

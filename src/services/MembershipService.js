@@ -10,8 +10,6 @@ export const getAllMemberships = async () => {
   }
 };
 
-
-
 export const addMembership = async (membership) => {
   try {
     const response = await api.post(MEMBERSHIP_API_CONSTANTS.ADD_MEMBERSHIP, membership);

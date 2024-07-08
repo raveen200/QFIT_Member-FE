@@ -4,6 +4,7 @@ import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import PropTypes from "prop-types";
 import { deleteMemberAction, getAllMembersAction } from "../../redux/actions/MemberActions";
+import { deleteMembershipAction } from "../../redux/actions/MembershipActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -17,6 +18,7 @@ function CustomDeleteModal({
   const HandleDelete = async () => {
     if (DeleteMemberId) {
       try {
+        dispatch(deleteMembershipAction(DeleteMemberId));
         const response = await dispatch(deleteMemberAction(DeleteMemberId)).unwrap();
         if (response === 200) {
           toast.success("Member Deleted successfully");
