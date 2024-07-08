@@ -14,7 +14,6 @@ function UserLIstPage() {
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
   const members = useSelector((state) => state.memberInfo.members.result);
   const memberships = useSelector((state) => state.membershipInfo.memberships);
-  console.log("memberships", memberships);
   const [findMember, setFindMember] = useState(members);
   const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
   const [DeleteMemberId, setDeleteMemberId] = useState(null);
