@@ -14,9 +14,9 @@ function App() {
       <AppLayout>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<DashboardPage />} />
+            <Route path="/" element={<LoginPage />} />
             <Route path="/admin/profile/:id" element={<ProfilePage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/admin/dashboard" element={<DashboardPage />} />
             <Route path="/admin/userList" element={<UserListPage />} />
             <Route path="/admin/finance" element={<FinancePage />} />
           </Routes>
