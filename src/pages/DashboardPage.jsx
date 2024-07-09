@@ -61,7 +61,7 @@ function DashboardPage() {
     : 0;
 
   const countRemainingDaysLessThanThirty = Array.isArray(memberships)
-    ? memberships.filter((membership) => membership.remainingDays < 30).length
+    ? memberships.filter((membership) => membership.remainingDays <= 30).length
     : 0;
 
   const countRemainingDaysMoreThanThirty = Array.isArray(memberships)
