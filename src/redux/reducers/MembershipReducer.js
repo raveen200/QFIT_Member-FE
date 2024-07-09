@@ -3,7 +3,8 @@ import {
   addMembershipAction,
   deleteMembershipAction,
   updateMembershipAction,
-  getMembershipByIdAction
+  getMembershipByIdAction,
+  getMembershipByNICAction
 } from "../actions/MembershipActions";
 
 const reducer = {
@@ -68,6 +69,20 @@ const reducer = {
       state.membership = action.payload;
     });
     builder.addCase(getMembershipByIdAction.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+  },
+
+  getMembershipByNic: (builder) => {
+    builder.addCase(getMembershipByNICAction.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getMembershipByNICAction.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.membership = action.payload;
+    });
+    builder.addCase(getMembershipByNICAction.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
     });

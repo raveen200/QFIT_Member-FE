@@ -17,7 +17,7 @@ function ProfilePage() {
   const { id } = useParams();
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
   const selectedMembership = useSelector((state) => state.membershipInfo.membership);
-  console.log(selectedMembership);
+
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
   const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
 
@@ -192,7 +192,7 @@ function ProfilePage() {
                 />
               </div>
             </div>
-            <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <dt className="text-lg font-medium text-gray-900 dark:text-white">About me</dt>
                 <dd className="mt-1 max-w-prose space-y-3 text-sm text-gray-500 dark:text-gray-400">
@@ -245,7 +245,7 @@ function ProfilePage() {
                   {detailedMember?.insName || "No Data found"}
                 </dd>
               </div>
-            </dl>
+            </div>
           </div>
         </div>
       </div>

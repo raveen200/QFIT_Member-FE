@@ -45,3 +45,12 @@ export const getMembershipById = async (id) => {
     return error;
   }
 };
+
+export const getMembershipByNIC = async (nic) => {
+  try {
+    const response = await api.get(`${MEMBERSHIP_API_CONSTANTS.GET_MEMBERSHIP_BY_NIC}/${nic}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

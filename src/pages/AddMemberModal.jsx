@@ -58,12 +58,15 @@ function AddMemberModal({ openUseraddModal, setOpenUseraddModal }) {
 
     const membershipData = {
       nic: nic,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
       membershipType: Number(membershipType),
       remainingDays,
       endDate: formattedEndDate
     };
 
-    console.log(membershipData);
+    // console.log(membershipData);
 
     const setMemberShip = await dispatch(addMembershipAction(membershipData));
 

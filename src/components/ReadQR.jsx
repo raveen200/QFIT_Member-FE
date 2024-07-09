@@ -1,6 +1,6 @@
 import { Modal } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { QrReader } from "react-qr-reader";
+import { Scanner } from "@yudiel/react-qr-scanner";
 import propTypes from "prop-types";
 
 function ReadQR({ openQRModal, setOpenQRModal, onData }) {
@@ -8,9 +8,13 @@ function ReadQR({ openQRModal, setOpenQRModal, onData }) {
 
   const handleScan = (data) => {
     if (data) {
-      const scanResult = JSON.parse(data);
-      setScanResult(scanResult);
-      onData(scanResult);
+      console.log("data", data);
+
+      const scanResultQR = JSON.parse(data[0].rawValue);
+
+      setScanResult(scanResultQR);
+
+      onData(scanResultQR);
       setOpenQRModal(false);
     }
   };
@@ -30,7 +34,7 @@ function ReadQR({ openQRModal, setOpenQRModal, onData }) {
               <p>JSON.parse(scanResult)</p>
             </div>
           ) : (
-            <QrReader delay={300} onError={handleError} onResult={handleScan} />
+            <Scanner scanDelay={300} onError={handleError} onScan={handleScan} />
           )}
         </div>
       </Modal.Body>

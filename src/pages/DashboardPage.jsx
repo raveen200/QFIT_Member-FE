@@ -30,9 +30,9 @@ function DashboardPage() {
   const tableData = {
     memberships: sortedMemberships?.map((membership) => ({
       Name:
-        members.find((member) => member.id === membership?.membershipId)?.firstName +
+        members?.find((member) => member?.id === membership?.membershipId)?.firstName +
         " " +
-        members.find((member) => member.id === membership?.membershipId)?.lastName,
+        members?.find((member) => member?.id === membership?.membershipId)?.lastName,
       Id: "G - " + membership?.membershipId,
       Nic: membership?.nic,
       MemberShipType:
@@ -61,11 +61,11 @@ function DashboardPage() {
     : 0;
 
   const countRemainingDaysLessThanThirty = Array.isArray(memberships)
-    ? memberships.filter((membership) => membership.remainingDays < 30).length
+    ? memberships.filter((membership) => membership.remainingDays <= 15).length
     : 0;
 
   const countRemainingDaysMoreThanThirty = Array.isArray(memberships)
-    ? memberships.filter((membership) => membership.remainingDays > 30).length
+    ? memberships.filter((membership) => membership.remainingDays > 15).length
     : 0;
 
   const percentageOfZeroDays = Math.floor((countRemainingDaysZero / membershipsCount) * 100);
