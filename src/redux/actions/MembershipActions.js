@@ -4,10 +4,10 @@ import {
   addMembership,
   deleteMembership,
   updateMembership,
-  getMembershipById
+  getMembershipById,
+  getMembershipByNIC
 } from "../../services/MembershipService";
 import { MEMBERSHIP_REDUX_ACTIONS } from "../../constants/Index";
-
 
 export const getAllMembershipsAction = createAsyncThunk(
   MEMBERSHIP_REDUX_ACTIONS.GET_MEMBERSHIP,
@@ -45,6 +45,14 @@ export const getMembershipByIdAction = createAsyncThunk(
   MEMBERSHIP_REDUX_ACTIONS.GET_MEMBERSHIP_BY_ID,
   async (id) => {
     const response = await getMembershipById(id);
+    return response;
+  }
+);
+
+export const getMembershipByNICAction = createAsyncThunk(
+  MEMBERSHIP_REDUX_ACTIONS.GET_MEMBERSHIP_BY_NIC,
+  async (nic) => {
+    const response = await getMembershipByNIC(nic);
     return response;
   }
 );

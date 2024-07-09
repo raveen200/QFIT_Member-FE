@@ -29,7 +29,8 @@ export const MEMBERSHIP_API_CONSTANTS = {
   ADD_MEMBERSHIP: "/api/Membership",
   DELETE_MEMBERSHIP: "/api/Membership",
   UPDATE_MEMBERSHIP: "/api/Membership",
-  GET_MEMBERSHIP_BY_ID: "/api/Membership"
+  GET_MEMBERSHIP_BY_ID: "/api/Membership",
+  GET_MEMBERSHIP_BY_NIC: "/api/Membership/GetByNIC"
 };
 
 export const MEMBERSHIP_REDUX_ACTIONS = {
@@ -37,5 +38,6 @@ export const MEMBERSHIP_REDUX_ACTIONS = {
   ADD_MEMBERSHIP: "membership/addMembership",
   DELETE_MEMBERSHIP: "membership/deleteMembership",
   UPDATE_MEMBERSHIP: "membership/updateMembership",
-  GET_MEMBERSHIP_BY_ID: "membership/getMembershipById"
+  GET_MEMBERSHIP_BY_ID: "membership/getMembershipById",
+  GET_MEMBERSHIP_BY_NIC: "membership/getMembershipByNIC"
 };

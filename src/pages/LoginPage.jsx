@@ -107,7 +107,7 @@ function LoginPage() {
                 </div>
                 <a
                   href="#"
-                  className="w-1/2 text-right text-sm text-primary-600 dark:text-primary-300 ">
+                  className="w-1/2 text-right text-sm text-primary-600  dark:text-gray-300 ">
                   Lost Password?
                 </a>
               </div>

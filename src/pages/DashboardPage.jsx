@@ -30,9 +30,9 @@ function DashboardPage() {
   const tableData = {
     memberships: sortedMemberships?.map((membership) => ({
       Name:
-        members.find((member) => member.id === membership?.membershipId)?.firstName +
+        members?.find((member) => member?.id === membership?.membershipId)?.firstName +
         " " +
-        members.find((member) => member.id === membership?.membershipId)?.lastName,
+        members?.find((member) => member?.id === membership?.membershipId)?.lastName,
       Id: "G - " + membership?.membershipId,
       Nic: membership?.nic,
       MemberShipType:
