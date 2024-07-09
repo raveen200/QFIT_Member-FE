@@ -7,6 +7,7 @@ import CustomSelect from "../components/custom/CustomSelect";
 import { toast } from "react-toastify";
 import { updateMembershipAction } from "../redux/actions/MembershipActions";
 import { clearMembership } from "../redux/slices/MembershipSlice";
+import emailjs from "@emailjs/browser";
 
 function UpdateMembershipModal({
   openUpdateMembershipModal,
@@ -41,6 +42,20 @@ function UpdateMembershipModal({
     return { updateRemainingDays, endDate };
   };
 
+  const membershipTitle = (membershipType) => {
+    if (membershipType === "1") {
+      return "Monthly";
+    } else if (membershipType === "2") {
+      return "Quarterly";
+    } else if (membershipType === "3") {
+      return "Semi_Annually";
+    } else if (membershipType === "4") {
+      return "Annually";
+    } else if (membershipType === "5") {
+      return "Corporate";
+    }
+  };
+
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -51,6 +66,7 @@ function UpdateMembershipModal({
   const onSubmit = async (data) => {
     const { membershipType, paymentMethod } = data;
     const { updateRemainingDays, endDate } = getMembershipDays(data.membershipType);
+    const title = membershipTitle(data.membershipType);
     const formattedEndDate = formatDate(endDate);
 
     const membershipData = {
@@ -64,6 +80,23 @@ function UpdateMembershipModal({
       paymentMethod: paymentMethod,
       endDate: formattedEndDate
     };
+
+    const sendEmailData = {
+      email_from: "GMMS",
+      to_name: `${getByNicMember?.firstName} ${getByNicMember?.lastName}`,
+      to_mail: getByNicMember?.email,
+      subject: "Membership Updated",
+      message: `Your membership has been updated to ${title} plan. Your new membership will expire on ${formattedEndDate}`
+    };
+
+    emailjs.send("service_9c0awq8", "template_pe6k2vm", sendEmailData, "HbKnmvfJI5RoQyMDw").then(
+      (response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      (error) => {
+        console.log("FAILED...", error);
+      }
+    );
 
     try {
       const response = await dispatch(updateMembershipAction(membershipData)).unwrap();

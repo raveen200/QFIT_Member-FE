@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.3",
     "@yudiel/react-qr-scanner": "^2.0.4",
@@ -22,6 +23,7 @@
     "html5-qrcode": "^2.3.8",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
+    "npm": "^10.8.1",
     "qrcode": "^1.5.3",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
