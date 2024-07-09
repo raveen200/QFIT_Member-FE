@@ -82,7 +82,7 @@ function UpdateMembershipModal({
     };
 
     const sendEmailData = {
-      email_from: "GMMS",
+      email_from: "QFIT GMMS",
       to_name: `${getByNicMember?.firstName} ${getByNicMember?.lastName}`,
       to_mail: getByNicMember?.email,
       subject: "Membership Updated",
