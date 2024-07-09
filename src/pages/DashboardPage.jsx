@@ -61,11 +61,11 @@ function DashboardPage() {
     : 0;
 
   const countRemainingDaysLessThanThirty = Array.isArray(memberships)
-    ? memberships.filter((membership) => membership.remainingDays <= 30).length
+    ? memberships.filter((membership) => membership.remainingDays <= 15).length
     : 0;
 
   const countRemainingDaysMoreThanThirty = Array.isArray(memberships)
-    ? memberships.filter((membership) => membership.remainingDays > 30).length
+    ? memberships.filter((membership) => membership.remainingDays > 15).length
     : 0;
 
   const percentageOfZeroDays = Math.floor((countRemainingDaysZero / membershipsCount) * 100);
