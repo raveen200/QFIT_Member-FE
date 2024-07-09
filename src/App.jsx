@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ReadQR from "./components/ReadQR.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import GateController from "./pages/GateController.jsx";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path="/admin/dashboard" element={<DashboardPage />} />
             <Route path="/admin/userList" element={<UserListPage />} />
             <Route path="/admin/finance" element={<FinancePage />} />
+            <Route path="/admin/gate" element={<GateController />} />
+
           </Routes>
         </Suspense>
       </AppLayout>

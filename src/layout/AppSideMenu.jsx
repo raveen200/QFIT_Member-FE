@@ -58,8 +58,13 @@ function AppSideMenu() {
               icon={HiChartPie}>
               Dashboard
             </Sidebar.Item>
-            <Sidebar.Item href="#" icon={HiInbox}>
-              Inbox
+            <Sidebar.Item
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/admin/gate");
+              }}
+              icon={HiInbox}>
+              Gate Control
             </Sidebar.Item>
 
             <Sidebar.Collapse icon={HiUser} label="Members">

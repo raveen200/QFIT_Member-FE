@@ -16,7 +16,6 @@ import UpdateMembershipModal from "./UpdateMembershipModal";
 function FinancePage() {
   const dispatch = useDispatch();
   const getByNicMember = useSelector((state) => state.membershipInfo.membership);
-  console.log(`getByNicMember`, getByNicMember);
   const [openQRModal, setOpenQRModal] = useState(false);
   const [openUpdateMembershipModal, setOpenUpdateMembershipModal] = useState(false);
   const { handleSubmit, control, trigger, reset, register } = useForm({
