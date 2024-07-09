@@ -11,12 +11,14 @@ import { getMembershipByNICAction } from "../redux/actions/MembershipActions";
 import { useDispatch, useSelector } from "react-redux";
 import { MdClear, MdDelete } from "react-icons/md";
 import { clearMembership } from "../redux/slices/MembershipSlice";
+import UpdateMembershipModal from "./UpdateMembershipModal";
 
 function FinancePage() {
   const dispatch = useDispatch();
   const getByNicMember = useSelector((state) => state.membershipInfo.membership);
-
+  console.log(`getByNicMember`, getByNicMember);
   const [openQRModal, setOpenQRModal] = useState(false);
+  const [openUpdateMembershipModal, setOpenUpdateMembershipModal] = useState(false);
   const { handleSubmit, control, trigger, reset, register } = useForm({
     mode: "onChange"
   });
@@ -59,6 +61,10 @@ function FinancePage() {
     reset();
   };
 
+  const updateMembershipHandler = () => {
+    setOpenUpdateMembershipModal(!openUpdateMembershipModal);
+  };
+
   return (
     <div className="w-full border-b  px-4 pt-6 border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex ">
       <div className="mb-1 w-full">
@@ -96,7 +102,11 @@ function FinancePage() {
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Update Membership
             </h5>
-            <BsQrCode className="cursor-pointer ml-2" onClick={QrModalHandle} size={24} />
+            <BsQrCode
+              className="cursor-pointer ml-2  dark:text-gray-400 dark:hover:text-white"
+              onClick={QrModalHandle}
+              size={24}
+            />
           </div>
           <div>
             <label
@@ -116,10 +126,14 @@ function FinancePage() {
                   {...register("nic", { required: true })}
                 />
 
-                <button type="submit" className="cursor-pointer">
+                <button
+                  type="submit"
+                  className="cursor-pointer  dark:text-gray-400 dark:hover:text-white">
                   <FaSearch size={24} />
                 </button>
-                <button onClick={handleDelete} className="ml-3">
+                <button
+                  onClick={handleDelete}
+                  className="ml-3  dark:text-gray-400 dark:hover:text-white">
                   <MdDelete size={24} />
                 </button>
               </div>
@@ -131,7 +145,7 @@ function FinancePage() {
               <address className="text-sm font-normal not-italic text-gray-500 dark:text-gray-400">
                 <div className="mt-4">Name</div>
                 <a className="text-sm font-medium text-gray-900 dark:text-white">
-                  {getByNicMember?.firstName + getByNicMember?.lastName || "No Data found"}
+                  {getByNicMember?.firstName +" "+ getByNicMember?.lastName || "No Data found"}
                 </a>
                 <div className="mt-4">Membership Plan</div>
                 <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -155,7 +169,10 @@ function FinancePage() {
             </div>
           </div>
           <div className="flex justify-center">
-            <button className=" w-2/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button
+              disabled={getByNicMember.nic ? false : true}
+              onClick={updateMembershipHandler}
+              className=" w-2/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Update
             </button>
           </div>
@@ -163,6 +180,13 @@ function FinancePage() {
       </div>
       {openQRModal && (
         <ReadQR openQRModal={openQRModal} setOpenQRModal={setOpenQRModal} onData={QRFoundData} />
+      )}
+      {openUpdateMembershipModal && (
+        <UpdateMembershipModal
+          openUpdateMembershipModal={openUpdateMembershipModal}
+          setOpenUpdateMembershipModal={setOpenUpdateMembershipModal}
+          getByNicMember={getByNicMember}
+        />
       )}
     </div>
   );
