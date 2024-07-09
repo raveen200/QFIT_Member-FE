@@ -17,7 +17,7 @@ function ProfilePage() {
   const { id } = useParams();
   const detailedMember = useSelector((state) => state.memberInfo.member.result);
   const selectedMembership = useSelector((state) => state.membershipInfo.membership);
-  console.log(selectedMembership);
+
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
   const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
 

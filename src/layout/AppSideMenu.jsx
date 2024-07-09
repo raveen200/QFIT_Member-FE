@@ -2,10 +2,12 @@ import { Sidebar } from "flowbite-react";
 import { BiBuoy } from "react-icons/bi";
 import { HiChartPie, HiInbox, HiUser, HiUserGroup, HiViewBoards } from "react-icons/hi";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearMembership } from "../redux/slices/MembershipSlice";
 
 function AppSideMenu() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [mobileView, setMobileView] = useState("");
   const { isOpen } = useSelector((state) => state.layout.sidebar);
@@ -36,6 +38,11 @@ function AppSideMenu() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleFinance = () => {
+    dispatch(clearMembership());
+    navigate("/admin/finance");
+  };
 
   return (
     <div
@@ -77,12 +84,7 @@ function AppSideMenu() {
             </Sidebar.Collapse>
           </Sidebar.ItemGroup>
           <Sidebar.ItemGroup>
-            <Sidebar.Item
-              className="cursor-pointer"
-              onClick={() => {
-                navigate("/admin/finance");
-              }}
-              icon={HiChartPie}>
+            <Sidebar.Item className="cursor-pointer" onClick={handleFinance} icon={HiChartPie}>
               Finance
             </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiViewBoards}>

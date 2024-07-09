@@ -28,7 +28,7 @@ function FinancePage() {
   };
 
   const QRFoundData = async (data) => {
-    console.log(`QRFoundData`, data);
+    // console.log(`QRFoundData`, data);
     const { nic } = data;
     try {
       const response = await dispatch(getMembershipByNICAction(nic)).unwrap();
@@ -145,7 +145,7 @@ function FinancePage() {
               <address className="text-sm font-normal not-italic text-gray-500 dark:text-gray-400">
                 <div className="mt-4">Name</div>
                 <a className="text-sm font-medium text-gray-900 dark:text-white">
-                  {getByNicMember?.firstName +" "+ getByNicMember?.lastName || "No Data found"}
+                  {getByNicMember?.firstName || "No Data found"}
                 </a>
                 <div className="mt-4">Membership Plan</div>
                 <div className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
