@@ -5,6 +5,7 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 import { getMembershipByNICAction } from "../redux/actions/MembershipActions";
 import { useDispatch, useSelector } from "react-redux";
 
+
 function GateController() {
   const [scanResult, setScanResult] = useState(null);
   const dispatch = useDispatch();
@@ -94,13 +95,9 @@ function GateController() {
                   {gateMember?.nic && (
                     <div className="flex gap-4">
                       {gateMember?.remainingDays > 0 ? (
-                        <button className=" bg-green-800 text-white p-8 rounded-xl">
-                          Access Grant
-                        </button>
+                        <div className=" bg-green-800 text-white p-8 rounded-xl">Access Grant</div>
                       ) : (
-                        <button className=" bg-red-800 text-white p-8 rounded-xl">
-                          Access Denied
-                        </button>
+                        <div className=" bg-red-800 text-white p-8 rounded-xl">Access Denied</div>
                       )}
                     </div>
                   )}
