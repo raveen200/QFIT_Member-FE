@@ -197,7 +197,9 @@ function RegisterPage() {
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 Already have an account?&nbsp;
-                <a href="#" className="text-blue-600 dark:text-primary-300">
+                <a
+                  className="text-blue-600 dark:text-primary-300 cursor-pointer"
+                  onClick={() => navigate("/")}>
                   Login here
                 </a>
               </p>

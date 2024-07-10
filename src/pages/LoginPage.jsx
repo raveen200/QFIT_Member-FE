@@ -7,7 +7,7 @@ import { AuthSchema } from "../schema/AuthSchema";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -32,13 +32,6 @@ function LoginPage() {
       toast.error("User Email or password is incorrect");
     }
   };
-
-
-
-
-
-
-
 
   return (
     <Card className=" w-full min-h-80vh">
@@ -122,7 +115,9 @@ function LoginPage() {
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 Not registered?&nbsp;
-                <a href="#" className="text-primary-600 dark:text-primary-300">
+                <a
+                  className="text-blue-600 dark:text-primary-300 cursor-pointer"
+                  onClick={() => navigate("/register")}>
                   Create account
                 </a>
               </p>
