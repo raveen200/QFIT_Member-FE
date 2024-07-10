@@ -109,8 +109,8 @@ function DashboardPage() {
           </h1>
         </div>
       </div>
-      <div className="grid grid-cols-12">
-        <div className="col-span-8">
+      <div className="md:grid grid-cols-12 ">
+        <div className="col-span-8 ">
           <div className="mb-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 dark:border-2 dark:border-cyan-200 sm:p-6 xl:p-8">
             <h4 className="text-sm mb-3 text-gray-900  dark:text-white sm:text-2xl">
               Latest Membership Updates
@@ -118,7 +118,7 @@ function DashboardPage() {
             <CustomTable columns={tableData.columns} data={tableData.memberships} />
           </div>
         </div>
-        <div className="col-span-4">
+        <div className="col-span-4 ">
           <div className="mb-4  ml-4 rounded-lg bg-stone-50 p-4 shadow dark:bg-gray-800 dark:border-2 dark:border-cyan-200 sm:p-6 xl:p-8">
             <h4 className="text-sm mb-3 text-gray-900  dark:text-white sm:text-2xl">
               {membershipsCount} Members Overview
