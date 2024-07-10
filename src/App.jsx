@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import ReadQR from "./components/ReadQR.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import GateController from "./pages/GateController.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/admin/profile/:id" element={<ProfilePage />} />
             <Route path="/admin/dashboard" element={<DashboardPage />} />
             <Route path="/admin/userList" element={<UserListPage />} />
             <Route path="/admin/finance" element={<FinancePage />} />
             <Route path="/admin/gate" element={<GateController />} />
-
           </Routes>
         </Suspense>
       </AppLayout>

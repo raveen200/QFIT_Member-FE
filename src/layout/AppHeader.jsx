@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 function AppHeader() {
   const navigate = useNavigate();
   const isLoginPage = location.pathname === "/";
+  const isRegisterPage = location.pathname === "/register";
   const dispatch = useDispatch();
 
   const handleToggleSidebar = () => {
@@ -25,7 +26,7 @@ function AppHeader() {
   };
   return (
     <Navbar fluid rounded className="bg-nav-cream dark:border-b-2 dark:border-cyan-200">
-      {!isLoginPage && <NavbarToggle onClick={handleToggleSidebar} />}
+      {!isLoginPage && !isRegisterPage && <NavbarToggle onClick={handleToggleSidebar} />}
       <NavbarBrand
         className="cursor-pointer"
         onClick={() => {
@@ -44,7 +45,7 @@ function AppHeader() {
           </Flowbite>
         </div>
 
-        {!isLoginPage && (
+        {!isLoginPage && !isRegisterPage && (
           <Dropdown
             arrowIcon={false}
             inline
