@@ -44,6 +44,11 @@ function AppSideMenu() {
     navigate("/admin/finance");
   };
 
+  const handleGate = () => {
+    dispatch(clearMembership());
+    navigate("/admin/gate");
+  };
+
   return (
     <div
       className={`transition ease-in-out duration-700 h-screen    ${isOpen ? `${mobileView}` : "hidden "}`}>
@@ -58,12 +63,7 @@ function AppSideMenu() {
               icon={HiChartPie}>
               Dashboard
             </Sidebar.Item>
-            <Sidebar.Item
-              className="cursor-pointer"
-              onClick={() => {
-                navigate("/admin/gate");
-              }}
-              icon={HiInbox}>
+            <Sidebar.Item className="cursor-pointer" onClick={handleGate} icon={HiInbox}>
               Gate Control
             </Sidebar.Item>
 
