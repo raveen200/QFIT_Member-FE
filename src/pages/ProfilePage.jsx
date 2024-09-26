@@ -11,23 +11,26 @@ import EditPersonalModal from "./EditPersonalModal.jsx";
 import EditGeneralModal from "./EditGeneralModal.jsx";
 import { PiIdentificationCardBold } from "react-icons/pi";
 import { getMembershipByIdAction } from "../redux/actions/MembershipActions";
+import { detailedMember, selectedMembership } from "../constants/data";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const detailedMember = useSelector((state) => state.memberInfo.member.result);
-  const selectedMembership = useSelector((state) => state.membershipInfo.membership);
+  // const dispatch = useDispatch();
+  // const { id } = useParams();
+  // // const detailedMember = useSelector((state) => state.memberInfo.member.result);
+  // console.log(detailedMember);
+  // const selectedMembership = useSelector((state) => state.membershipInfo.membership);
+  // console.log(selectedMembership);
 
   const [openEditPersonalModal, setOpenEditPersonalModal] = useState(false);
   const [openEditGeneralModal, setOpenEditGeneralModal] = useState(false);
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      dispatch(getMemberByIdAction(id));
-      dispatch(getMembershipByIdAction(id));
-    };
-    fetchMembers();
-  }, [dispatch, id]);
+  // useEffect(() => {
+  //   const fetchMembers = async () => {
+  //     dispatch(getMemberByIdAction(id));
+  //     dispatch(getMembershipByIdAction(id));
+  //   };
+  //   fetchMembers();
+  // }, [dispatch, id]);
 
   const handleEditPersonalModal = () => {
     setOpenEditPersonalModal(true);

@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllMembershipsAction } from "../redux/actions/MembershipActions";
 import { useNavigate } from "react-router-dom";
 import CustomDeleteModal from "../components/custom/CustomDeleteModal";
-
+import { memberships, members } from "../constants/data";
 
 function UserLIstPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openUseraddModal, setOpenUseraddModal] = useState(false);
-  const members = useSelector((state) => state.memberInfo.members.result);
-  const memberships = useSelector((state) => state.membershipInfo.memberships);
+  // const members = useSelector((state) => state.memberInfo.members.result);
+  // const memberships = useSelector((state) => state.membershipInfo.memberships);
   const [findMember, setFindMember] = useState(members);
   const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
   const [DeleteMemberId, setDeleteMemberId] = useState(null);
@@ -33,7 +33,7 @@ function UserLIstPage() {
   }, [dispatch]);
 
   const HandleEdit = (id) => {
-    navigate(`/admin/profile/${id}`);
+    navigate(`/admin/profile/${4}`);
   };
 
   const HandleDelete = (id) => {

@@ -17,6 +17,7 @@ function LoginPage() {
   });
 
   const onSubmit = async (data) => {
+    navigate("/admin/dashboard");
     const userName = data.email;
     data.username = userName;
     delete data.email;

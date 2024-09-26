@@ -9,11 +9,13 @@ import { getAllMembersAction } from "../redux/actions/MemberActions";
 import { useDispatch, useSelector } from "react-redux";
 import { TiHome } from "react-icons/ti";
 import GreaterThanIcon from "../components/custom/Icon/GreaterThanIcon";
+import { memberships ,members } from "../constants/data";
 
 function DashboardPage() {
   const dispatch = useDispatch();
-  const members = useSelector((state) => state.memberInfo.members.result);
-  const memberships = useSelector((state) => state.membershipInfo.memberships) || [];
+  // const members = useSelector((state) => state.memberInfo.members.result);
+  // console.log(members);
+  // const memberships = useSelector((state) => state.membershipInfo.memberships) || [];
   const sortedMemberships =
     memberships.length > 0
       ? [...memberships].sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
